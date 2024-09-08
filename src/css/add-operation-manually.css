@@ -1,0 +1,86 @@
+thead, th {
+    background-color: #000;
+    color: white;  
+    
+    th:nth-child(1){
+        width: 35px;
+        text-align: center;
+    }
+    
+    th:nth-child(2){
+        width: 75px;
+        padding-inline: 7px;
+    }
+
+    th:nth-child(3){
+        width: 100px !important;
+    }
+
+    th:nth-child(4){
+        width: 100px !important;
+    }
+
+    th:nth-child(5){
+        width: 100px !important;
+    }
+
+    th:nth-child(6){
+        width: 100px !important;
+    }
+
+    th:nth-child(7){
+        width: 100px !important;
+    }
+}
+
+
+
+tbody{
+    .add-operation-weight{
+        width: 50px;
+        height: 25px;
+        padding-left: 5px;
+        outline: none;
+    }
+
+    select{
+        width: 90px;
+        height: 33px;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(210, 210, 210, 0.442);
+        text-align: center;
+        font-family: "Montserrat", sans-serif;
+    }
+
+    input[type=text]{
+        width: 70px;
+        height: 33px;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        padding-left: 10px;
+        box-shadow: 0 0 10px rgba(210, 210, 210, 0.442);
+        font-family: "Montserrat", sans-serif;
+    }
+
+    td{
+        width: 100px;
+    }
+}
+
+
+.add-new-operation{
+    cursor: pointer;
+    padding: 5px 12px;
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 9px;
+    margin-left: -15px;
+}

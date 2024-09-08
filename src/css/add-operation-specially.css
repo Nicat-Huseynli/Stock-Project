@@ -1,0 +1,35 @@
+.add-operation-specially{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+        select{
+            cursor: pointer;
+            padding: 20px 60px;
+            border: 1px solid black;
+            background: black;
+            color: white;
+            font-weight: 550;
+            font-size: 17px;
+        }
+}
+
+.save-operation-div{
+    display: flex;
+    justify-content: flex-end;
+
+    .save-operation-btn{
+            cursor: pointer;
+            padding: 10px 30px;
+            border: 1px solid black;
+            /* border: none; */
+            background: black;
+            color: white;
+            font-weight: 550;
+
+        button:hover{
+            background: white;
+            color: black;
+        }
+    }
+}

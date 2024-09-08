@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anbar</title>
+
+    <link rel="stylesheet" href="./src/css/style.css">
+
+    <link rel="stylesheet" href="./src/css/choosen-day.css">
+
+    <!-- Font Awesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Include AOS CSS -->
+    <!-- <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"> -->
+
+</head>
+<body>
+    
+    <div class="nav-overlay"></div>
+
+    <nav class="nav-menu">
+        <ul>
+            <li class="nav-item ">
+                <a class="nav-link" aria-current="page" href="index.html">Əməliyyat</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="customer.html">Müştəri</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="warehouse.html">Anbar</a>
+            </li>
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropbtn">Kassa</a>
+                <div class="dropdown-content" style="margin-top: 10px;">
+                  <a href="executor.html">İcraçı Kassa</a>
+                  <a style="background-color: black; color: white; border-radius: 10px;" href="daily-checkout.html">Günlük Kassa</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Əlaqə</a>
+            </li>
+        </ul>
+    </nav>
+    
+
+    <header>
+
+        <div class="nav-btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="filters">
+            <form action="">
+
+              <div>
+                <select name="" id="operation-select">
+                    <option style="color: red;" value="0">Sıfırla ✘</option>
+                    <option value="0" selected disabled hidden>Əməliyyat növü</option>
+                    <option value="1"><a href="#">Alış</a></option>
+                    <option value="2"><a href="#">Satış</a></option>
+                    <option value="3"><a href="#">Pul almaq</a></option>
+                    <option value="4"><a href="#">Pul vermək</a></option>
+                </select>
+            </div>
+
+                <div>
+                    <select class="customer-dropdown" name="" id="">
+                        <!-- <option style="color: red;">Sıfırla ✘</option>
+                        <option value="" selected disabled hidden>Müştəri</option>
+                        <option value=""><a href="#">Elnur</a></option>
+                        <option value=""><a href="#">Teyyub</a></option>
+                        <option value=""><a href="#">Meqi</a></option> -->
+                    </select>
+                </div>
+
+                <div>
+                    <select class="product-dropdown" name="" id="">
+                        <!-- <option value="">Təmizləyin</option>
+                        <option value="" selected disabled hidden>Mal</option>
+                        <option value=""><a href="#">AKKUM</a></option>
+                        <option value=""><a href="#">ATXOD</a></option>
+                        <option value=""><a href="#">Heç nə</a></option> -->
+                    </select>
+                </div>
+
+                <div >
+                    <select class="executor-dropdown" name="" id="">
+                        <!-- <option style="color: red;">Sıfırla ✘</option>
+                        <option value="" selected disabled hidden >İcraçı</option>
+                        <option value="">Heç kim</option>
+                        <option value="">Əjdər</option> -->
+                    </select>
+                </div>
+
+                 
+
+                 <div>
+                        <!-- Çəki -->
+                        <input class="input-weight" type="text" placeholder="Çəki">
+                </div>
+
+                <div>
+                        <!-- Qiymət -->
+                        <input class="input-price" type="text" placeholder="Qiyməti(KQ)">
+                </div>
+
+                <div>
+                        <!-- Net məbləğ q-sız -->
+                        <input class="input-net-price" type="text" placeholder="Net Məbləğ">
+                </div>
+
+                  <!-- Hədiyyə -->
+                <div class="prize">
+                    <label for="prize" style="color: grey;">Hədiyyə</label>
+                    <input type="checkbox" name="prize" id="prize"> 
+                </div>
+
+                     <!-- Tarix -->
+                     <div class="date-inputs">
+                      <label for="from">Tarix aralığı:</label>
+  
+                      <div>
+                          <input disabled type="date" name="from" id="fromDateInput" value="">
+                          <input disabled type="date" name="to" id="toDateInput" value="">
+                      </div>
+                  </div>
+
+                  <div style="display: flex; align-items: center;">
+                    <button class="save-btn" type="submit">✔</button>
+                    
+                    <div class="generate-excel-div">
+                      <button class="generate-excel">
+                        <img src="./download-removebg-preview (2).png" title="Generate to Excel" alt="">
+                      </button>
+                    </div>
+                  </div>
+
+            </form>
+        </div>
+
+    </header>
+
+    <main>
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Əməliyyat Növü</th>
+                <th scope="col">Müştəri</th>
+                <th scope="col">Mal</th>
+                <th scope="col">İcraçı</th>
+                <th scope="col">Tarix</th>
+                <th scope="col">Çəki</th>
+                <th scope="col">Çıxılan <br>Çəki</th>
+                <th scope="col">Qalıq <br> Çəki</th>
+                <th scope="col">Çıxılan <br> Faiz</th>
+                <th scope="col">Net <br>Çəki</th>
+                <th scope="col">Qiymət <br>(KQ)</th>
+                <th scope="col">Məbləğ</th>
+                <th scope="col">Net Məbləğ<br>(Q-sız)</th>
+                <th scope="col">Verilən <br> pul</th>
+                <th scope="col">Alınan <br> pul</th>
+                <th scope="col">Düzəliş <br>et</th>
+                <th scope="col">Sil</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- <tr class="operations-row">
+                <th scope="row" class="id-num">17</th>
+                <td>Alış</td>
+                <td>Elnur</td>
+                <td>AKKUM</td>
+                <td>Heç kim</td>
+                <td>17.08.2024 <br>17:01:08</td>
+                <td>300</td>
+                <td>0</td>
+                <td>300</td>
+                <td>0</td>
+                <td>300</td>
+                <td>360</td>
+                <td>1,2</td>
+                <td>300</td>
+                <td>0</td>
+                <td>0</td>
+                <td><i class="fa-solid fa-pencil"></i></td>
+                <td><i class="fa-solid fa-trash-can"></i></td>
+              </tr> -->
+            </tbody>
+    </table>
+
+
+    <div class="delete-overlay"></div>
+
+    <div class="delete-modal">
+      <p>Silmək İstədiyinizə Əminisiniz?</p>
+
+      <div>
+        <button class="yes answer">Bəli</button>
+        <button class="no answer">Xeyr</button>
+      </div>
+    </div>
+
+    <div class="edit-overlay"></div>
+    <div class="edit-customer-modal">
+        <form class="edit-form" action="">
+            <input hidden type="text" name="id" id="">
+            
+          <div class="edit-weight-div">
+            <label for="weight">Çəki:</label>
+            <input class="edit-weight" type="text" name="" id="weight"> 
+          </div>
+
+          <div class="edit-deductedWeight-div">          
+            <label for="deductedWeight">Çıxılan Çəki:</label>
+            <input class="edit-deductedWeight" type="text" name="" id="deductedWeight"> 
+          </div> 
+
+          <div class="edit-deductedPercentage-div">
+            <label for="deductedPercentage">Çıxılan Faiz:</label>
+            <input class="edit-deductedPercentage" type="text" name="" id="deductedPercentage"> 
+          </div>
+
+          <div class="edit-pricePerUnit-div">
+            <label for="pricePerUnit">Qiymət(KQ):</label>
+            <input class="edit-pricePerUnit" type="text" name="" id="pricePerUnit"> 
+          </div>
+          
+          <div class="edit-moneyGive-div">
+            <label for="moneyGive">Verilən Pul:</label>
+            <input class="edit-moneyGive" type="text" name="" id="moneyGive"> 
+          </div>
+
+          <div class="edit-moneyGet-div">
+            <label for="moneyGet">Alınan Pul:</label>
+            <input class="edit-moneyGet" type="text" name="" id="moneyGet"> 
+          </div>
+          
+            <button class="edit-operation-btn">Əlavə Edin</button>
+        </form>
+    </div>  
+    </main>
+
+
+
+    <!-- <script src="./main.js"></script> -->
+
+    <script src="choosen-day.js"></script>
+
+    <!-- Include AOS JavaScript -->
+    <!-- <script src="https://unpkg.com/aos@2.3.4/dist/aos.js">
+        AOS.init();
+    </script> -->
+</body>
+</html>

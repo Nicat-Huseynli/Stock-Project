@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./src/css/style.css">
+
+    <link rel="stylesheet" href="./src/css/customer.css">
+
+    <link rel="stylesheet" href="./src/css/warehouse.css">
+
+     <!-- Font Awesome link -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    
+    <div class="nav-overlay"></div>
+
+    <nav class="nav-menu">
+        <ul>
+            <li class="nav-item ">
+                <a class="nav-link" aria-current="page" href="index.html">Əməliyyat</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="customer.html">Müştəri</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="warehouse.html">Anbar</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropbtn">Kassa</a>
+                <div class="dropdown-content">
+                  <a href="executor.html">İcraçı Kassa</a>
+                  <a href="daily-checkout.html">Günlük Kassa</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Əlaqə</a>
+            </li>
+        </ul>
+    </nav>
+    
+
+    <header>
+
+        <div class="nav-btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <input type="search" placeholder="Axtarış" onkeyup="filterTable()" name="" id="searchInput">
+        <!-- <button class="create-customer">Şəxs Yarat</button> -->
+
+        <button class="add-product">✚</button>
+
+    </header>
+
+    
+    <main>
+
+
+        <table id="dataTable" class="table customer-table">
+            <thead>
+              <tr>
+                <th scope="col">Mal</th>
+                <th scope="col">Çəki (KQ)</th>
+                <th scope="col">Düzəliş et</th>
+                <th scope="col">Sil</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="product-row">
+                <td class="prod-name" ><a href="product.html">AKtxM</a></td>
+                <td>85</td>
+                <td><i class="fa-solid fa-pencil edit-icon"></i></td>
+                <td><i class="fa-solid fa-trash-can delete-icon"></i></td>
+              </tr>
+            </tbody>
+    </table>
+
+
+    <div class="delete-overlay"></div>
+
+    <div class="delete-modal">
+      <p>Silmək İstədiyinizə Əminisiniz?</p>
+
+      <div>
+        <button class="yes answer">Bəli</button>
+        <button class="no answer">Xeyr</button>
+      </div>
+    </div>
+
+
+    <div class="overlay"></div>
+        
+    <div class="modal">
+        <form action="">
+            <label for="name">Ad:</label>
+            <input class="enter-execute-name" type="text" name="name">
+            <label for="price">Çəki:</label>
+            <input class="enter-execute-price" type="text" name="price">
+            <button class="add-product-btn">Əlavə Edin</button>
+        </form>
+    </div>
+
+
+    <div class="edit-overlay"></div>
+        <div class="edit-warehouse-modal">
+            <form action="">
+                <input hidden type="text" name="id" id="">
+                <label for="name">Ad:</label>
+                <input class="enter-product-name" type="text" name="name">
+                <label for="checkout-amount">Pul:</label>
+                <input class="enter-weight" type="text" name="price">
+                <button class="edit-warehouse-btn">Əlavə Edin</button>
+            </form>
+        </div>
+
+    </main>
+
+    <!-- <script src="main.js"></script> -->
+
+    <script src="warehous.js"></script>
+
+</body>
+</html>

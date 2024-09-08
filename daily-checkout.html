@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anbar</title>
+
+    <link rel="stylesheet" href="./src/css/style.css">
+
+    <link rel="stylesheet" href="./src/css/daily-checkout.css">
+
+    <!-- Font Awesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Include AOS CSS -->
+    <!-- <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"> -->
+
+</head>
+<body>
+    
+    <div class="nav-overlay"></div>
+
+    <nav class="nav-menu">
+        <ul>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="index.html">Əməliyyat</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="customer.html">Müştəri</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="warehouse.html">Anbar</a>
+            </li>
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropbtn">Kassa</a>
+                <div class="dropdown-content">
+                  <a href="executor.html">İcraçı Kassa</a>
+                  <a style="background-color: black; color: white; border-radius: 10px;" href="daily-checkout.html">Günlük Kassa</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Əlaqə</a>
+            </li>
+        </ul>
+    </nav>
+    
+
+    <header>
+
+        <div class="nav-btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+    </header>
+
+    <main>
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Tarix</th>
+                <th scope="col">Mədaxil</th>
+                <th scope="col">Məxaric</th>
+                <th scope="col">Gün Sonu</th>
+                
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- <tr class="first-row">
+                <td scope="row"><a href="choosen-day.html">25.08.24</a></td>
+                <td>600</td>
+                <td>700</td>
+                <td>400</td>
+              </tr> -->
+            </tbody>
+    </table>
+    </main>
+
+
+
+    <!-- <script src="./main.js"></script> -->
+
+    <script src="daily-checkout.js"></script>
+    <!-- <script src="./choosen-day.js"></script> -->
+
+    <!-- Include AOS JavaScript -->
+    <!-- <script src="https://unpkg.com/aos@2.3.4/dist/aos.js">
+        AOS.init();
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anbar</title>
+
+    <link rel="stylesheet" href="./src/css/style.css">
+
+    <link rel="stylesheet" href="./src/css/add-operation-manually.css">
+    <link rel="stylesheet" href="./src/css/add-operation-specially.css">
+
+    <!-- Font Awesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Include AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+</head>
+<body>
+    
+    <div class="nav-overlay"></div>
+
+    <nav class="nav-menu">
+        <ul>
+            <li class="nav-item active">
+                <a class="nav-link" aria-current="page" href="index.html">Əməliyyat</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="customer.html">Müştəri</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="warehouse.html">Anbar</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropbtn">Kassa</a>
+                <div class="dropdown-content">
+                  <a href="executor.html">İcraçı Kassa</a>
+                  <a href="daily-checkout.html">Günlük Kassa</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Əlaqə</a>
+            </li>
+        </ul>
+    </nav>
+    
+
+    <header>
+
+        <div class="nav-btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="add-operation-div">
+            <button class="add-new-operation">✚</button>
+        </div>
+
+        <div class="save-operation-div">
+            <button class="save-operation-btn">Yadda Saxla</button>
+        </div>
+    </header>
+
+    <main>
+
+
+
+
+        <table class="table">
+            <thead>
+              <tr>
+                <!-- <th scope="col">ID</th> -->
+                <th scope="col">Əməliyyat Növü</th>
+                <th scope="col">Müştəri</th>
+                <th scope="col">Mal</th>
+                <th scope="col">İcraçı</th>
+                <!-- <th scope="col">Tarix</th> -->
+                <th scope="col">Çəki</th>
+                <th scope="col">Çıxılan Çəki</th>
+                <!-- <th scope="col">Qalıq <br> Çəki</th> -->
+                <th scope="col">Çıxılan Faiz</th>
+                <!-- <th scope="col">Net <br>Çəki</th> -->
+                <th scope="col">Qiymət (KQ)</th>
+                <!-- <th scope="col">Məbləğ</th> -->
+                <!-- <th scope="col">Net Məbləğ<br>(Q-sız)</th> -->
+                <th scope="col">Verilən pul</th>
+                <th scope="col">Alınan pul</th>
+                <!-- <th scope="col">Düzəliş <br>et</th> -->
+                <th scope="col">Sil</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="operation-row"> 
+                <!-- <th scope="row" class="id-num">17</th> -->
+                <td>
+                    <select class="operation-name" name="" id="operation-select">
+                        <option value="" value="0" hidden></option>
+                        <option class="buy" value="1">Alış</option>
+                        <option class="sell" value="2">Satış</option>
+                        <option class="receive-money" value="3">Pul Alma</option>
+                        <option class="give-money" value="4">Pul Vermə</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="customer-dropdown" name="" id="">
+                        <!-- <option value="" hidden></option>
+                        <option value="">Elnur</option>
+                        <option value="">Teyyub</option>
+                        <option value="">Nicat</option>
+                        <option value="">Meqi</option> -->
+                    </select>
+                </td>
+                <td>
+                    <select class="product-dropdown" name="" id="">
+                        <!-- <option value="" hidden></option>
+                        <option value="">AKKUM</option>
+                        <option value="">Atxod</option>
+                        <option value="">Heç nə</option> -->
+                    </select>
+                </td>
+                <td>
+                    <select class="executor-dropdown" name="" id="">
+                        <!-- <option value="" hidden></option>
+                        <option value="">Elnur</option>
+                        <option value="">Teyyub</option>
+                        <option value="">Nicat</option>
+                        <option value="">Meqi</option> -->
+                    </select>
+                </td>
+                <!-- <td>17.08.2024 <br>17:01:08</td> -->
+                <td>
+                    <input class="add-weight add-operation-weight" type="text">
+                </td>
+                <td>
+                    <input class="add-deducted-weight add-operation-weight" type="text">
+                </td>
+                <!-- <td>
+                    <input class="add-remain-weight add-operation-weight" type="text">
+                </td> -->
+                <td>
+                    <input class="add-deducted-percentage add-operation-weight" type="text">
+                </td>
+                <!-- <td>
+                    <input class="add-net-weight add-operation-weight" type="text">
+                </td> -->
+                <td>
+                    <input class="add-price add-operation-weight" type="text">
+                </td>
+                <!-- <td>
+                    <input class="add-amount add-operation-weight" type="text">
+                </td> -->
+                <!-- <td>
+                    <input class="add-net-amount add-operation-weight" type="text">
+                </td> -->
+                <td>
+                    <input  class="add-given-money add-operation-weight" type="text">
+                </td>
+                <td>
+                    <input class="add-received-money add-operation-weight" type="text">
+                </td>
+                <!-- <td><i class="fa-solid fa-pencil"></i></td> -->
+                <td><i class="fa-solid fa-trash-can"></i></td>
+              </tr>
+            </tbody>
+    </table>
+
+
+    <div class="delete-overlay"></div>
+
+    <div class="delete-modal">
+      <p>Silmək İstədiyinizə Əminisiniz?</p>
+
+      <div>
+        <button class="answer yes">Bəli</button>
+        <button class="answer no">Xeyr</button>
+      </div>
+    </div>
+
+    <div class="add-operation-modal">
+        <button class="choice">Əl ilə</button>
+        <button class="choice">Xüsusi</button>
+    </div>
+
+
+    </main>
+
+
+
+    <!-- <script src="./main.js"></script> -->
+
+    <script src="./add-operation-manually.js"></script>
+
+    <!-- Include AOS JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js">
+        AOS.init();
+    </script>
+</body>
+</html>

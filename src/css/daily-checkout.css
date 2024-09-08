@@ -1,0 +1,22 @@
+nav{
+    .dropdown-content{
+        top: 35px !important;
+    }
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+header{
+
+    input{
+        height: 36px;
+        outline: none;
+        padding-inline: 10px;
+        border: none;
+        box-shadow: 0 0 10px rgba(210, 210, 210, 0.442);
+        border-radius: 7px;
+    }
+}

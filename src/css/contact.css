@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    transition: .5s;
+    background-color: rgb(254, 254, 254);
+    font-family: "Montserrat", sans-serif;
+}
+
+.nav-btn{
+    position: absolute;
+    top: 20px ;
+    left: 30px ;
+    z-index: 500;
+
+    i{
+        font-size: 25px;
+        color: black(41, 7, 155);
+        cursor: pointer;
+    }
+}
+
+main{
+    height: 90vh;
+    position: relative;
+    z-index: -5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+
+    .contact-info{
+        height: 50vh;
+        width: 50%;
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 50px;
+        color: black;
+
+        h2{
+            font-size: 50px;
+        }
+
+        p{
+            font-size: 25px;
+        }
+
+        p:last-child{
+            font-weight: bold;
+        }
+    }
+}
+
+a{
+    text-decoration: none;
+}
+
+.nav-overlay{
+    display: none;
+    position: absolute;
+    z-index: 5000;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.732);
+    /* opacity: 0;
+    transition: all .5s; */
+}
+
+nav{
+    display: none;
+    position: absolute;
+    z-index: 5000;
+    transition: all .5s;
+    background-color: #fff;
+    height: 100vh;
+    width: 20%;
+    padding: 10px;
+    padding-top: 15px;
+
+    
+    i{
+        cursor: pointer;
+        position: absolute;
+        right: 30px;
+        color: black;
+    }
+    
+    ul{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        padding-top: 150px;
+        
+        li{
+            cursor: pointer;
+        }
+        
+        a{
+            padding-left: 35px; 
+            font-size: 18px;
+            padding-right: 200px;
+            color: black;
+        }
+
+        a:hover{
+            color: rgb(112, 112, 112);
+        }
+    }
+
+    .active{
+        background-color: black;
+        padding: 5px;
+        padding-top: 10px;
+        border-radius: 12px;
+        transition: all .5s;
+
+        a{
+
+            color: white;
+        }
+        
+    }
+}
+
+
+
+
+body {
+    animation: growBody 1s;
+  }
+  
+  @keyframes growBody {
+      0% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+} 
+
+nav {
+    animation: openNav 1s;
+  }
+  
+  @keyframes openNav {
+      0% { transform: translateX(-150px) }
+    100% { transform: translateX(0); }
+} 
+
+.nav-overlay {
+    animation: overlay 1s;
+}
+
+@keyframes overlay {
+    0% { transform: translateX(-100%) }
+    100% { transform: translateX(0); }
+} 
+
+/* nav {
+    animation: closeNav 1s;
+  }
+  
+  @keyframes closeNav {
+      100% { transform: translateX(150px) }
+      0% { transform: translateX(0) }
+}  */
