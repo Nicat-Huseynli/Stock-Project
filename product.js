@@ -436,12 +436,12 @@ inputNetPrice.addEventListener("change", (e)=> {
 })
 
 
-const prize = document.querySelector("#prize");
+// const prize = document.querySelector("#prize");
 
-prize.addEventListener("change", (e) => {
-    const isChecked = e.target.checked;  // Use .checked to get true/false
-    console.log("Prize selected:", isChecked);  // Logs true or false
-});
+// prize.addEventListener("change", (e) => {
+//     const isChecked = e.target.checked;  // Use .checked to get true/false
+//     console.log("Prize selected:", isChecked);  // Logs true or false
+// });
 
 
 // Handle the save button click
@@ -522,8 +522,8 @@ document.querySelector(".save-btn").addEventListener('click', (e) => {
     console.log("selec inputPrice", TotalPrice);
 
 
-    const isPrizeChecked = prize.checked;  // Returns true if checked, false otherwise
-    console.log("Prize selected:", isPrizeChecked);  // Logs true or false
+    // const isPrizeChecked = prize.checked;  // Returns true if checked, false otherwise
+    // console.log("Prize selected:", isPrizeChecked);  // Logs true or false
 
 
     let urlStr = "http://localhost:5000/api/Operation/GetFilter?"
@@ -568,7 +568,7 @@ document.querySelector(".save-btn").addEventListener('click', (e) => {
          urlStr += `DateTo=${DateTo}&`
     }
 
-    urlStr += `IsGift=${isPrizeChecked}`
+    // urlStr += `IsGift=${isPrizeChecked}`
 
     console.log(urlStr);
 
@@ -649,7 +649,7 @@ document.querySelector(".generate-excel").addEventListener("click", (e) => {
     const selectedNetPrice = inputNetPrice.value;
     let TotalPrice = selectedNetPrice;
 
-    const isPrizeChecked = prize.checked;
+    // const isPrizeChecked = prize.checked;
 
     // Build the query string for the URL
     let urlStr = "http://localhost:5000/api/Operation/GenerateExcel?";
@@ -662,7 +662,7 @@ document.querySelector(".generate-excel").addEventListener("click", (e) => {
     if (TotalPrice != 0) urlStr += `TotalPrice=${TotalPrice}&`;
     if (DateFrom !== "NaN.NaN.NaN") urlStr += `DateFrom=${DateFrom}&`;
     if (DateTo !== "NaN.NaN.NaN") urlStr += `DateTo=${DateTo}&`;
-    urlStr += `IsGift=${isPrizeChecked}`;
+    // urlStr += `IsGift=${isPrizeChecked}`;
 
     console.log("Final URL:", urlStr);
 

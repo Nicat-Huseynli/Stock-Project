@@ -110,10 +110,10 @@
                 </div>
 
                   <!-- Hədiyyə -->
-                <div class="prize">
+                <!-- <div class="prize">
                     <label for="prize">Hədiyyə</label>
                     <input type="checkbox" name="prize" id="prize"> 
-                </div>
+                </div> -->
 
                     <!-- Tarix -->
                 <div class="date-inputs">
@@ -215,15 +215,16 @@
         <button class="choice special">Xüsusi</button>
     </div>
 
+
     <div class="add-operation-specially-overlay"></div>
     <div class="add-operation-specially">
       <!-- <form action=""> -->
       <select name="" id="special-operation-select">
-        <option value="" hidden>Əməliyyat növü</option>
+        <option value="0" hidden>Əməliyyat növü</option>
         <option value="1">Alış</option>
         <option value="2">Satış</option>
-        <option value="3">Pul alma</option>
-        <option value="4">Pul vermə</option>
+        <option value="3">Pul almaq</option>
+        <option value="4">Pul vermək</option>
       </select>
 
       <select class="customer-dropdown-special" name="" id="">
@@ -234,9 +235,16 @@
         <option value="">Meqi</option> -->
       </select>
 
-      <a href="add-operation-specially.html"><button onclick="getValue()">Təsdiq</button></a>
+      <button class="special-operation-btn" onclick="getValue()">Təsdiq</button>
     <!-- </form> -->
     </div>
+
+    <div class="warning-modal-overlay"></div>
+    <div class="warning-modal">
+      <p>Məlumatları düzgün daxil edin.</p>
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+    
 
     <!-- <div class="edit-overlay"></div>
     <div class="edit-warehouse-modal">

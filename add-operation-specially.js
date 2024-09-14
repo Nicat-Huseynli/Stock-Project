@@ -900,8 +900,8 @@ document.querySelector(".save-operation-btn").addEventListener("click", (e) => {
             deductedPercentage: selectedDeductedPercentage != 0 ? selectedDeductedPercentage : 0,
             pricePerUnit: selectedPrice != 0 ? selectedPrice : 0,
             moneyGive: selectedGivenMoney != 0 ? selectedGivenMoney : 0,
-            moneyGet: selectedReceivedMoney != 0 ? selectedReceivedMoney : 0,
-            isGift: true
+            moneyGet: selectedReceivedMoney != 0 ? selectedReceivedMoney : 0
+            // isGift: true
         });
     });
 

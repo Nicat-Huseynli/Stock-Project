@@ -77,6 +77,20 @@ addOperationSpeciallyOverlay?.addEventListener("click", () => {
 
 
 
+fetch("http://localhost:5000/api/Person/GetPersonsDropdown")
+    .then(response => response.json())
+    .then(posts => {
+        console.log(posts);
+        let options = '<option value="0" selected disabled hidden>Müştəri</option>';
+        posts.forEach(function(item) {
+            options += `<option value="${item.id}">${item.name}</option>`;
+        });
+        speciallyCustomerDropdown.innerHTML = options;
+    })
+    .catch(err => console.error("Failed to fetch customer data:", err));
+
+
+
 const speciallySelectElement = document.querySelector("#special-operation-select");
 const speciallyCustomerDropdown = document.querySelector(".customer-dropdown-special");
 
@@ -90,7 +104,7 @@ speciallyCustomerDropdown.addEventListener("change", (e) =>{
     const speciallySelectedCustomer = e.target.value
     console.log("customer", speciallySelectedCustomer);
 })
-
+    
 
 function getValue(){
     const speciallySelectedValue = speciallySelectElement.value;
@@ -107,17 +121,47 @@ function getValue(){
     localStorage.setItem("customer Value Text",selectedCustomerText)    
 }
 
-fetch("http://localhost:5000/api/Person/GetPersonsDropdown")
-    .then(response => response.json())
-    .then(posts => {
-        console.log(posts);
-        let options = '<option value="" selected disabled hidden>Müştəri</option>';
-        posts.forEach(function(item) {
-            options += `<option value="${item.id}">${item.name}</option>`;
-        });
-        speciallyCustomerDropdown.innerHTML = options;
-    })
-    .catch(err => console.error("Failed to fetch customer data:", err));
+
+const specialOperationBtn = document.querySelector(".special-operation-btn")
+
+specialOperationBtn.addEventListener("click", (e)=>{
+
+    e.preventDefault()
+
+    const speciallySelectedValue = speciallySelectElement.value;  // Get the selected value from the select element
+    console.log("Value on Save button click:", speciallySelectedValue);
+
+    // let OperationTypeId = selectedValue
+    // console.log( "ID" ,OperationTypeId);
+
+
+
+    const speciallySelectedCustomer = speciallyCustomerDropdown.value
+    console.log("selected",speciallySelectedCustomer);
+
+    // let PersonId = selectedCustomer
+    // console.log("Customer ID", PersonId);
+
+    if(speciallySelectedValue === '0' || speciallySelectedCustomer === '0'){
+        // alert("Məlumatları daxil edin!")
+
+        document.querySelector(".warning-modal").style.display = "flex"
+        document.querySelector(".warning-modal-overlay").style.display = "block"
+        document.querySelector(".warning-modal-overlay").addEventListener("click", ()=>{
+            document.querySelector(".warning-modal").style.display = "none"
+            document.querySelector(".warning-modal-overlay").style.display = "none"
+        })
+
+        document.querySelector(".fa-xmark").addEventListener("click", ()=>{
+            document.querySelector(".warning-modal").style.display = "none"
+            document.querySelector(".warning-modal-overlay").style.display = "none"
+        })
+
+        // window.location.href = "index.html";
+    } else {
+        window.location.href = "add-operation-specially.html"
+    }
+})
 
 
 // Fetch
@@ -421,6 +465,10 @@ fetch("http://localhost:5000/api/Employee/GetEmployeesDropdown")
 
 
 
+
+
+
+
 // Add change event listener once when the page loads
 const selectElement = document.querySelector("#operation-select");
 
@@ -498,12 +546,17 @@ inputNetPrice.addEventListener("change", (e)=> {
 })
 
 
-const prize = document.querySelector("#prize");
+// const prize = document.querySelector("#prize");
 
-prize.addEventListener("change", (e) => {
-    const isChecked = e.target.checked;  // Use .checked to get true/false
-    console.log("Prize selected:", isChecked);  // Logs true or false
-});
+// prize.addEventListener("change", (e) => {
+//     const isChecked = e.target.checked;  // Use .checked to get true/false
+//     console.log("Prize selected:", isChecked);  // Logs true or false
+// });
+
+
+
+
+
 
 
 // Handle the save button click
@@ -580,16 +633,12 @@ document.querySelector(".save-btn").addEventListener('click', (e) => {
     console.log("selec inputPrice", TotalPrice);
 
 
-    const isPrizeChecked = prize.checked;  // Returns true if checked, false otherwise
-    console.log("Prize selected:", isPrizeChecked);  // Logs true or false
+    // const isPrizeChecked = prize.checked;  // Returns true if checked, false otherwise
+    // console.log("Prize selected:", isPrizeChecked);  // Logs true or false
 
 
     let urlStr = "http://localhost:5000/api/Operation/GetFilter?"
 
-
-    // Sual işarəsi 
-
-    // if()
 
     if(OperationTypeId != 0){
         urlStr += `OperationTypeId=${OperationTypeId}&`
@@ -639,7 +688,7 @@ document.querySelector(".save-btn").addEventListener('click', (e) => {
          urlStr += `DateTo=${DateTo}&`
     }
 
-    urlStr += `IsGift=${isPrizeChecked}`
+    // urlStr += `IsGift=${isPrizeChecked}`
 
     console.log(urlStr);
 
@@ -678,7 +727,6 @@ document.querySelector(".save-btn").addEventListener('click', (e) => {
         attachEditEventListeners();
         })
         .catch(error => console.log(error));
-    
 
 });
 
@@ -718,7 +766,7 @@ document.querySelector(".generate-excel").addEventListener("click", (e) => {
     const selectedNetPrice = inputNetPrice.value;
     let TotalPrice = selectedNetPrice;
 
-    const isPrizeChecked = prize.checked;
+    // const isPrizeChecked = prize.checked;
 
     // Build the query string for the URL
     let urlStr = "http://localhost:5000/api/Operation/GenerateExcel?";
@@ -731,7 +779,7 @@ document.querySelector(".generate-excel").addEventListener("click", (e) => {
     if (TotalPrice != 0) urlStr += `TotalPrice=${TotalPrice}&`;
     if (DateFrom !== "NaN.NaN.NaN") urlStr += `DateFrom=${DateFrom}&`;
     if (DateTo !== "NaN.NaN.NaN") urlStr += `DateTo=${DateTo}&`;
-    urlStr += `IsGift=${isPrizeChecked}`;
+    // urlStr += `IsGift=${isPrizeChecked}`;
 
     console.log("Final URL:", urlStr);
 
@@ -754,66 +802,4 @@ document.querySelector(".generate-excel").addEventListener("click", (e) => {
             console.error("There was a problem with the fetch operation:", error);
         });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// selectElement.addEventListener("change", (e) => {
-//     const selectedValue = e.target.value;  // Get the selected value
-//     console.log("Selected operation value:", selectedValue);
-// });
-
-
-
-// document.querySelector(".save-btn").addEventListener('click', (e) =>{
-
-//     const selectElement = document.querySelector("#operation-select");
-
-//     selectElement.addEventListener("change", (e) => {
-//         const selectedValue = e.target.value;  // Get the selected value
-//         console.log("Selected operation value:", selectedValue);
-//     });
-
-//     // let OperationTypeId = selectedValue
-    
-
-//     // let urlStr = "http://localhost:5000/api/Operation/GetFilter"
-
-
-//     // fetch(urlStr)
-//     // .then(response => response.json())
-//     // .then(posts => {
-//     //     console.log(posts);
-
-
-
-
-
-        
-//     //     if(OperationTypeId != 0){
-//     //         urlStr += `?OperationTypeId=`
-//     //     }
-//     // })
-//     e.preventDefault()
-// })
-
-
 
