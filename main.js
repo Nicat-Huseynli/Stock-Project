@@ -81,7 +81,8 @@ fetch("http://localhost:5000/api/Person/GetPersonsDropdown")
     .then(response => response.json())
     .then(posts => {
         console.log(posts);
-        let options = '<option value="0" selected disabled hidden>Müştəri</option>';
+        let options = `<option value="0" selected disabled hidden>Müştəri</option> 
+                       <option class="add-new-customer-dropdown" value="add-customer" style="background-color: black; color: white">✚</option>`
         posts.forEach(function(item) {
             options += `<option value="${item.id}">${item.name}</option>`;
         });
@@ -89,10 +90,65 @@ fetch("http://localhost:5000/api/Person/GetPersonsDropdown")
     })
     .catch(err => console.error("Failed to fetch customer data:", err));
 
-
-
 const speciallySelectElement = document.querySelector("#special-operation-select");
 const speciallyCustomerDropdown = document.querySelector(".customer-dropdown-special");
+
+// Add event listener to check the selected value
+speciallyCustomerDropdown.addEventListener("change", function() {
+    let selectedValue = speciallyCustomerDropdown.value;
+    console.log("Selected value:", selectedValue);
+
+    if (selectedValue === "add-customer") {
+        console.log("Add new customer option selected");
+        document.querySelector(".add-customer-overlay").style.display = "block"
+        document.querySelector(".add-customer-modal").style.display = "block"
+        document.querySelector(".add-customer-overlay").addEventListener("click", () => {
+            document.querySelector(".add-customer-overlay").style.display = "none"
+            document.querySelector(".add-customer-modal").style.display = "none"
+        })
+
+    } else {
+        console.log("Selected customer ID:", selectedValue);
+    }
+});
+
+
+const enterCustomerName = document.querySelector(".enter-customer-name");
+
+    document.querySelector(".add-customer-btn")?.addEventListener("click", (event) => {
+    // event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    // document.querySelector(".customer-dropdown").value = enterCustomerName.value
+
+    // Prepare the request body as a JSON object
+    const requestBody = {
+        name: enterCustomerName.value // Capture the value from the input field
+    };
+
+    fetch("http://localhost:5000/api/Person/Add", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Specify the content type as JSON
+        },
+        body: JSON.stringify(requestBody) // Convert the JavaScript object to a JSON string
+    })
+    .then(res => {
+        if (!res.ok) {
+            console.log("Problem");
+            return;
+        }
+        return res.json(); // Parse the response as JSON
+    })
+    .then(data => {
+        console.log(data); // Log the response data
+    })
+    .catch(err => {
+        console.log(err); // Log any errors
+    });
+});
+
+
+
 
 speciallySelectElement.addEventListener("change", (e) => {
     const speciallySelectedValue = e.target.value;  // Get the selected value
@@ -328,7 +384,7 @@ function attachEditEventListeners() {
                 document.querySelector(".edit-customer-modal").style.height = "30vh"
                 document.querySelector(".edit-form").style.top = "20%"
             } 
-            else if(operationType === "Pul vermək"){
+            else if(operationType === "Pul vermək" || operationType === "Rasxod" || operationType === "Maaş"){
                 document.querySelector(".edit-weight-div").setAttribute("hidden", true);
                 document.querySelector(".edit-deductedWeight-div").setAttribute("hidden", true);
                 document.querySelector(".edit-deductedPercentage-div").setAttribute("hidden", true);
@@ -525,7 +581,6 @@ toDateInput.addEventListener("change", (e) => {
     const toSelectedDate = formatDate(e.target.value)
     console.log("Selected date:", toSelectedDate);  // Log the selected date
 });
-
 
 
 inputWeight.addEventListener("change", (e)=> {

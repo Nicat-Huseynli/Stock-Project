@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="./src/css/customer.css">
 
+    <link rel="stylesheet" href="./src/css/worker.css">
+
      <!-- Font Awesome link -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -21,12 +23,12 @@
             <li class="nav-item ">
                 <a class="nav-link" aria-current="page" href="index.html">Əməliyyat</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="customer.html">Müştəri</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="worker.html">İşçi</a>
-          </li>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="warehouse.html">Anbar</a>
             </li>
@@ -57,7 +59,7 @@
         </div>
 
         <input type="search" placeholder="Axtarış" onkeyup="filterTable()" name="" id="searchInput">
-        <button class="create-customer">✚</button>
+        <button class="create-worker">✚</button>
 
         
 
@@ -67,11 +69,11 @@
     <main>
 
 
-        <table id="dataTable" class="table customer-table">
+        <table id="dataTable" class="table worker-table">
             <thead>
               <tr>
                 <th scope="col">Ad</th>
-                <th scope="col">Pul</th>
+                <th scope="col">Maaş</th>
                 <th scope="col">Düzəliş et</th>
                 <th scope="col">Sil</th>
               </tr>
@@ -91,13 +93,13 @@
 
     <div class="overlay"></div>
         
-    <div class="modal">
-        <form class="add-customer" action="">
+    <div class="modal" style="height: 50vh; top: 105px;">
+        <form class="add-worker" action="">
             <label for="name">Ad:</label>
-            <input class="enter-customer-name" type="text" name="name">
-            <!-- <label for="price">Pul:</label>
-            <input class="enter-execute-price" type="text" name="price"> -->
-            <button class="add-customer-btn">Əlavə Edin</button>
+            <input class="enter-worker-name" type="text" name="name">
+            <label for="price">Maaş:</label>
+            <input class="enter-salary" type="text" name="price">
+            <button class="add-worker-btn">Əlavə Edin</button>
         </form>
     </div>
 
@@ -114,12 +116,14 @@
     </div>
 
     <div class="edit-overlay"></div>
-    <div class="edit-customer-modal">
+    <div class="edit-worker-modal" style="height: 50vh; top: 105px;">
         <form action="">
             <input hidden type="text" name="id" id="">
             <label for="name">Ad:</label>
-            <input class="edit-customer-name" type="text" name="">
-            <button class="edit-customer-btn">Əlavə Edin</button>
+            <input class="edit-worker-name" type="text" name="">
+            <label for="price">Maaş:</label>
+            <input class="edit-salary" type="text" name="price">
+            <button class="edit-worker-btn">Əlavə Edin</button>
         </form>
     </div>
     
@@ -127,8 +131,10 @@
 
     <!-- <script src="main.js"></script> -->
 
-    <script src="./customer.js"></script>
+    <!-- <script src="./worker.js"></script> -->
     <!-- <script src="./all-operations.js" type="module"></script> -->
+
+    <script src="worker.js"></script>
 
 </body>
 </html>

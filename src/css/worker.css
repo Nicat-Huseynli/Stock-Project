@@ -1,4 +1,4 @@
-.customer-table{
+.worker-table{
 
     thead{
         width: 100% !important;
@@ -43,7 +43,7 @@ header{
         border-radius: 7px;
     }
 
-    .create-customer{
+    .create-worker{
         cursor: pointer;
         padding: 5px 12px;
         background-color: black;
@@ -71,13 +71,13 @@ main{
     }
     
     .modal,
-    .edit-customer-modal{
+    .edit-worker-modal{
         display: none;
         position: fixed;
         top: 30%;
         left: 26%;
         width: 45%;
-        height: 30vh;
+        height: 40vh;
         z-index: 60;
         background-color: white;
         color: black;
@@ -90,7 +90,7 @@ main{
             top: 20%;
             left: 20%;
             width: 50%;
-            height: 20vh;
+            height: 50vh;
     
             label{
                 font-weight: bold;

@@ -30,6 +30,9 @@
                 <a class="nav-link" href="customer.html">Müştəri</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="worker.html">İşçi</a>
+              </li>
+            <li class="nav-item">
                 <a class="nav-link" href="warehouse.html">Anbar</a>
             </li>
             <li class="nav-item dropdown">
@@ -39,6 +42,12 @@
                   <a href="daily-checkout.html">Günlük Kassa</a>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="consumption.html">Rasxod</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="salary.html">Maaş</a>
+              </li>
             <li class="nav-item">
                 <a class="nav-link" href="contact.html">Əlaqə</a>
             </li>
@@ -74,7 +83,8 @@
                 <th scope="col">Müştəri</th>
                 <th scope="col">Mal</th>
                 <th scope="col">İcraçı</th>
-                <!-- <th scope="col">Tarix</th> -->
+                <th scope="col">İşçi</th>
+                <th scope="col">Məlumat</th>
                 <th scope="col">Çəki</th>
                 <th scope="col">Çıxılan Çəki</th>
                 <!-- <th scope="col">Qalıq <br> Çəki</th> -->
@@ -100,6 +110,8 @@
                         <option class="sell" value="2">Satış</option>
                         <option class="receive-money" value="3">Pul Alma</option>
                         <option class="give-money" value="4">Pul Vermə</option>
+                        <option class="consumption" value="5">Rasxod</option>
+                        <option class="salary" value="6">Maaş</option>
                     </select>
                 </td>
                 <td>
@@ -128,7 +140,19 @@
                         <option value="">Meqi</option> -->
                     </select>
                 </td>
+                <td>
+                    <select class="worker-dropdown" name="" id="">
+                        <!-- <option value="" hidden></option>
+                        <option value="">Elnur</option>
+                        <option value="">Teyyub</option>
+                        <option value="">Nicat</option>
+                        <option value="">Meqi</option> -->
+                    </select>
+                </td>
                 <!-- <td>17.08.2024 <br>17:01:08</td> -->
+                <td>
+                    <input class="add-info" type="text">
+                </td>
                 <td>
                     <input class="add-weight add-operation-weight" type="text">
                 </td>
@@ -182,6 +206,32 @@
         <button class="choice">Xüsusi</button>
     </div>
 
+
+    <div class="add-info-overlay" style="display: none;"></div>
+    <div class="add-info-modal" style="display: none;">
+        <p>Əlaqədar Mətn Daxil Edin.</p>
+        <form id="add-info-form">
+            <textarea class="info-text" autofocus required rows="2" cols="70"></textarea>
+            <button type="submit" class="confirm">Təsdiq Et</button>
+        </form>
+    </div>
+    
+    <!-- Assuming there is a button for triggering save operation -->
+    <!-- <button class="save-operation-btn">Save Operations</button> -->
+    
+
+
+    <div class="add-customer-overlay"></div>
+        
+    <div class="add-customer-modal">
+        <form class="add-customer" action="">
+            <label for="name">Ad:</label>
+            <input class="enter-customer-name" type="text" name="name">
+            <!-- <label for="price">Pul:</label>
+            <input class="enter-execute-price" type="text" name="price"> -->
+            <button class="add-customer-btn">Əlavə Edin</button>
+        </form>
+    </div>
 
     </main>
 

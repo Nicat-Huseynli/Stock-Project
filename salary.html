@@ -12,8 +12,6 @@
     <!-- Font Awesome link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Include AOS CSS -->
-    <!-- <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"> -->
 
 </head>
 <body>
@@ -34,17 +32,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="warehouse.html">Anbar</a>
             </li>
-            <li class="nav-item dropdown active">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropbtn">Kassa</a>
-                <div class="dropdown-content">
+                <div class="dropdown-content" style="margin-top: -12px;">
                   <a href="executor.html">İcraçı Kassa</a>
-                  <a style="background-color: black; color: white; border-radius: 10px;" href="daily-checkout.html">Günlük Kassa</a>
+                  <a href="daily-checkout.html">Günlük Kassa</a>
                 </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="consumption.html">Rasxod</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link" href="salary.html">Maaş</a>
               </li>
             <li class="nav-item">
@@ -60,17 +58,32 @@
             <i class="fa-solid fa-bars"></i>
         </div>
 
+
+        <input type="search" placeholder="Axtarış" onkeyup="filterTable()" name="" id="searchInput">
+
+        <div class="date-inputs">
+            <!-- <label for="from">Tarix aralığı:</label> -->
+
+            <div>
+               <!-- <input type="month" name="" id=""> -->
+                <input type="number" class="inputMonth" max="12" min="1" placeholder="Month">
+                <input type="text" class="inputYear" style="width: 80px;" placeholder="Year">
+            </div>
+        </div>
+
+        <button class="save-btn" type="submit" style="margin-left: -20px;">✔</button>
     </header>
 
     <main>
 
-        <table class="table">
+        <table class="table" id="dataTable">
             <thead>
               <tr>
                 <th scope="col">Tarix</th>
-                <th scope="col">Mədaxil</th>
-                <th scope="col">Məxaric</th>
-                <th scope="col">Gün Sonu</th>
+                <th scope="col">İşçi adı</th>
+                <th scope="col">Aldığı Maaş</th>
+                <th scope="col">Qanuni Maaş</th>
+                <th scope="col">Bizə Borcu</th>
                 
               </tr>
             </thead>
@@ -86,16 +99,7 @@
     </table>
     </main>
 
+    <script src="./salary.js"></script>
 
-
-    <!-- <script src="./main.js"></script> -->
-
-    <script src="daily-checkout.js"></script>
-    <!-- <script src="./choosen-day.js"></script> -->
-
-    <!-- Include AOS JavaScript -->
-    <!-- <script src="https://unpkg.com/aos@2.3.4/dist/aos.js">
-        AOS.init();
-    </script> -->
 </body>
 </html>
