@@ -147,7 +147,9 @@ tbody{
 }
 
 
-.add-customer-overlay{
+.add-customer-overlay,
+.add-product-overlay,
+.add-worker-overlay{
     display: none;
     position: fixed;
     top: 0;
@@ -158,7 +160,9 @@ tbody{
     background-color: rgba(74, 74, 74, 0.755);
 }
 
-.add-customer-modal{
+.add-customer-modal,
+.add-product-modal,
+.add-worker-modal{
     display: none;
     position: fixed;
     top: 30%;
@@ -204,5 +208,16 @@ tbody{
             right: -60px;
             margin-top: 15px;
         }
+    }
+}
+
+.add-product-modal,
+.add-worker-modal{
+    height: 45vh !important;
+    width: 45% !important;
+    top: 150px;
+    
+    button{
+        right: -55px !important;
     }
 }

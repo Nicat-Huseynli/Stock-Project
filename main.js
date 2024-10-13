@@ -280,26 +280,48 @@ function attachDeleteEventListeners() {
         });
     });
 
-    // Handle the "Yes" button click
-    yes.addEventListener("click", () => {
-        if (currentRow) {
-            const rowId = currentRow.getAttribute("data-id");
-            fetch(`http://localhost:5000/api/Operation/DeleteOperation?id=${rowId}`, {
-                method: 'DELETE',
-            })
-            .then(res => {
-                if (!res.ok) {
-                    console.log("Problem with delete request");
-                    return;
-                }
-                currentRow.remove(); // Remove the current row from the table
-            })
-            .catch(err => console.log(err));
+    
+// Handle the "Yes" button click for deletion
+yes.addEventListener("click", () => {
+    if (currentRow) {
+        const rowId = currentRow.getAttribute("data-id");
+
+        fetch(`http://localhost:5000/api/Operation/DeleteOperation?id=${rowId}`, {
+            method: 'DELETE',
+        })
+        .then(res => {
+            console.log(res);
+
+            if (!res.ok) {
+                console.log("Problem with delete request");
+                return;
+            }
+
+            if (res.status === 4) {
+                console.log("15 gündən sonra silmək olmaz");
+
+
+                document.querySelector(".delete-warning-overlay").style.display = "flex";
+                document.querySelector(".delete-warning-modal").style.display = "flex";
+
+                document.querySelector(".close-delete-warning-modal").addEventListener("click", () => {
+                    document.querySelector(".delete-warning-overlay").style.display = "none";
+                    document.querySelector(".delete-warning-modal").style.display = "none";
+                });
+            } else {
+                currentRow.remove();
+            }
 
             deleteOverlay.style.display = "none";
             deleteModal.style.display = "none";
-        }
-    });
+        })
+        .catch(err => {
+            console.log("Error with fetch:", err);
+        });
+    }
+});
+
+
 
     no.addEventListener("click", () => {
         deleteOverlay.style.display = "none";

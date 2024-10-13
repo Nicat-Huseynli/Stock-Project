@@ -90,7 +90,7 @@ fetch(`http://localhost:5000/api/Salary/GetSalaryOperations?month=${selectedMont
     let code = ""
     posts.operations.forEach(function (item) {
         code += `
-            <tr class="first-row" onclick="addDate('${item.date}')">    
+            <tr class="first-row">    
                 <td scope="row">${formatDate(item.addedDate)}</td>
                 <td>${item.employeeName}</td>
                 <td>${item.workerName}</td>

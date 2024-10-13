@@ -220,6 +220,7 @@ const addRow = () => {
         <td>
             <select class="customer-dropdown" name="" id="">
                 <option value="" hidden></option> <!-- Add empty option -->
+                <option class="add-new-customer-dropdown" value="add-customer" style="background-color: black; color: white">✚</option>
             </select>
         </td>
         <td>
@@ -274,13 +275,13 @@ const addRow = () => {
         // newRowOperation.value = "6";  // Set value to 5
         // newRowOperation.disabled = true;  // Disable the dropdown
     } 
-    // else {
-    //     const newRowOperation = newRow.querySelector(".operation-name");
-    //     const optionSix = newRowOperation.querySelector('option[value="6"]');
-    //     if (optionSix) {
-    //         optionSix.remove();  // Remove the option with value "5"
-    //     }
-    // }
+    else {
+        const newRowOperation = newRow.querySelector(".operation-name");
+        const optionSix = newRowOperation.querySelector('option[value="6"]');
+        if (optionSix) {
+            optionSix.remove();  // Remove the option with value "6"
+        }
+    }
 
     // Populate dropdowns
     populateDropdown(newRow.querySelector(".customer-dropdown"), "http://localhost:5000/api/Person/GetPersonsDropdown");
@@ -426,12 +427,69 @@ fetch("http://localhost:5000/api/Product/GetProductsDropdown")
 .then(posts => {
     console.log(posts);
     let code = `<option value="" selected disabled hidden ></option>`
+    code +=`<option class="add-new-product-dropdown" value="add-product" style="background-color: black; color: white">✚</option>`
+    console.log(code);
     posts.forEach(function (item) {
         code += `<option class="prod-id" value="${item.id}"><a href="#">${item.name}</a></option>`
     })
     productDropdown.innerHTML = code
 })
 
+
+// Add event listener to check the selected value
+productDropdown.addEventListener("change", function() {
+    let selectedValue = productDropdown.value;
+    console.log("Selected value:", selectedValue);
+
+    if (selectedValue === "add-product") {
+        console.log("Add new product option selected");
+        document.querySelector(".add-product-overlay").style.display = "block"
+        document.querySelector(".add-product-modal").style.display = "block"
+        document.querySelector(".add-product-overlay").addEventListener("click", () => {
+            document.querySelector(".add-product-overlay").style.display = "none"
+            document.querySelector(".add-product-modal").style.display = "none"
+        })
+
+    } else {
+        console.log("Selected product ID:", selectedValue);
+    }
+});
+
+const enterProductName = document.querySelector(".enter-product-name");
+const enterWeight = document.querySelector(".enter-weight");
+
+    document.querySelector(".add-product-btn")?.addEventListener("click", (event) => {
+    // event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    // document.querySelector(".customer-dropdown").value = enterCustomerName.value
+
+    // Prepare the request body as a JSON object
+    const requestBody = {
+        name: enterProductName.value, // Capture the value from the input field
+        netWeight: enterWeight.value
+    };
+
+    fetch("http://localhost:5000/api/Product/Add", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Specify the content type as JSON
+        },
+        body: JSON.stringify(requestBody) // Convert the JavaScript object to a JSON string
+    })
+    .then(res => {
+        if (!res.ok) {
+            console.log("Problem");
+            return;
+        }
+        return res.json(); // Parse the response as JSON
+    })
+    .then(data => {
+        console.log(data); // Log the response data
+    })
+    .catch(err => {
+        console.log(err); // Log any errors
+    });
+});
 
 // Executor Dropdown Menu for first row
 const executorDropdown = document.querySelector(".executor-dropdown")
@@ -453,12 +511,73 @@ fetch("http://localhost:5000/api/Worker/GetWorkers")
 .then(response => response.json())
 .then(posts => {
     console.log(posts);
-    let code = `<option value="" selected disabled hidden ></option>`
+    let code = `<option value="" selected disabled hidden ></option>
+    <option class="add-new-worker-dropdown" value="add-worker" style="background-color: black; color: white">✚</option>`
     posts.forEach(function (item) {
         code += `<option value="${item.id}">${item.name}</option>`
     })
     workerDropdown.innerHTML = code
 })
+
+
+// Add event listener to check the selected value
+workerDropdown.addEventListener("change", function() {
+    let selectedValue = workerDropdown.value;
+    console.log("Selected value:", selectedValue);
+
+    if (selectedValue === "add-worker") {
+        console.log("Add new worker option selected");
+        document.querySelector(".add-worker-overlay").style.display = "block"
+        document.querySelector(".add-worker-modal").style.display = "block"
+        document.querySelector(".add-worker-overlay").addEventListener("click", () => {
+            document.querySelector(".add-worker-overlay").style.display = "none"
+            document.querySelector(".add-worker-modal").style.display = "none"
+        })
+
+    } else {
+        console.log("Selected worker ID:", selectedValue);
+    }
+});
+
+
+
+const enterWorkerName = document.querySelector(".enter-worker-name");
+const enterSalary = document.querySelector(".enter-salary");
+
+    document.querySelector(".add-worker-btn")?.addEventListener("click", (event) => {
+    // event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    // document.querySelector(".customer-dropdown").value = enterCustomerName.value
+
+    // Prepare the request body as a JSON object
+    const requestBody = {
+        name: enterWorkerName.value, // Capture the value from the input field
+        salary: enterSalary.value
+    };
+
+    fetch("http://localhost:5000/api/Worker/Add", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Specify the content type as JSON
+        },
+        body: JSON.stringify(requestBody) // Convert the JavaScript object to a JSON string
+    })
+    .then(res => {
+        if (!res.ok) {
+            console.log("Problem");
+            return;
+        }
+        return res.json(); // Parse the response as JSON
+    })
+    .then(data => {
+        console.log(data); // Log the response data
+    })
+    .catch(err => {
+        console.log(err); // Log any errors
+    });
+});
+
+
 
 
 // ADD OPERATION

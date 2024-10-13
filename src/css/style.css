@@ -417,8 +417,7 @@ main{
 
 
     .delete-overlay,
-    .add-operation-overlay
-    {
+    .add-operation-overlay{
         display: none;
         position: fixed;
         top: 0;
@@ -429,6 +428,9 @@ main{
         background-color: rgba(74, 74, 74, 0.755);
     }
 
+    .delete-warning-overlay{
+        background-color: rgba(74, 74, 74, 0.751) !important;
+    }
 
     .add-operation-specially-overlay,
     .warning-modal-overlay{
