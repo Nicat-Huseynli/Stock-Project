@@ -102,8 +102,8 @@ fetch(`http://localhost:5000/api/Salary/GetSalaryOperations?month=${selectedMont
     let infoCode = ""
     
     infoCode += `
-        <h4 class="getedSalary" style="margin-left: 15px; margin-bottom: 5px;">Aldığı Maaş: ${posts.salary}</h4>
-        <h4 class="legalSalary" style="margin-left: 15px; margin-bottom: 5px;">Qanuni Maaş: ${posts.money}</h4>
+        <h4 class="getedSalary" style="margin-left: 15px; margin-bottom: 5px;">Aldığı Maaş: ${posts.money}</h4>
+        <h4 class="legalSalary" style="margin-left: 15px; margin-bottom: 5px;">Qanuni Maaş: ${posts.salary}</h4>
         <h4 class="debtMoney" style="margin-left: 15px; margin-bottom: 5px;">Bizə Borcu: ${posts.debtMoney}</h4> `
 
     moneyInfo.innerHTML = infoCode

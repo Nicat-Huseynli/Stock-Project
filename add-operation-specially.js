@@ -161,6 +161,21 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(err => console.error(`Failed to fetch data from ${url}:`, err));
     };
 
+    const populateProductDropdown = (dropdown, url) => {
+        fetch(url)
+            .then(response => response.json())
+            .then(posts => {
+                let options = '<option value="" selected disabled hidden ></option>';
+                options += `<option class="add-new-product-dropdown" value="add-product" style="background-color: black; color: white">✚</option>`
+                posts.forEach(item => {
+                    options += `<option value="${item.id}">${item.name}</option>`;
+                });
+                dropdown.innerHTML = options;
+            })
+            .catch(err => console.error(`Failed to fetch data from ${url}:`, err));
+    };
+
+
     const operationText = localStorage.getItem("operation Value Text");
     const customerText = localStorage.getItem("customer Value Text");
 
@@ -192,7 +207,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     <option selected value="${customerValue}">${customerText}</option>
                 </select>
             </td>
-            <td><select class="product-dropdown" name="" id=""></select></td>
+            <td>
+                <select class="product-dropdown" name="" id="">
+                    <option value="" hidden></option> <!-- Add empty option -->
+                </select>
+            </td>
             <td><select class="executor-dropdown" name="" id=""></select></td>
             <td><input class="add-weight add-operation-weight" type="text"></td>
             <td><input class="add-deducted-weight add-operation-weight" type="text"></td>
@@ -205,7 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         tbody.appendChild(newRow);
 
-        populateDropdown(newRow.querySelector(".product-dropdown"), "http://localhost:5000/api/Product/GetProductsDropdown");
+        populateProductDropdown(newRow.querySelector(".product-dropdown"), "http://localhost:5000/api/Product/GetProductsDropdown");
         populateDropdown(newRow.querySelector(".executor-dropdown"), "http://localhost:5000/api/Employee/GetEmployeesDropdown");
 
         handleOperationChange(newRow);
@@ -258,6 +277,80 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+
+
+
+    // Product Dropdown Menu for first row
+const productDropdown = document.querySelector(".product-dropdown")
+fetch("http://localhost:5000/api/Product/GetProductsDropdown")
+.then(response => response.json())
+.then(posts => {
+    console.log(posts);
+    let code = `<option value="" selected disabled hidden ></option>`
+    code +=`<option class="add-new-product-dropdown" value="add-product" style="background-color: black; color: white">✚</option>`
+    console.log(code);
+    posts.forEach(function (item) {
+        code += `<option class="prod-id" value="${item.id}"><a href="#">${item.name}</a></option>`
+    })
+    console.log(code);
+    productDropdown.innerHTML = code
+})
+
+
+// Add event listener to check the selected value
+productDropdown.addEventListener("change", function() {
+    let selectedValue = productDropdown.value;
+    console.log("Selected value:", selectedValue);
+
+    if (selectedValue === "add-product") {
+        console.log("Add new product option selected");
+        document.querySelector(".add-product-overlay").style.display = "block"
+        document.querySelector(".add-product-modal").style.display = "block"
+        document.querySelector(".add-product-overlay").addEventListener("click", () => {
+            document.querySelector(".add-product-overlay").style.display = "none"
+            document.querySelector(".add-product-modal").style.display = "none"
+        })
+
+    } else {
+        console.log("Selected product ID:", selectedValue);
+    }
+});
+
+const enterProductName = document.querySelector(".enter-product-name");
+const enterWeight = document.querySelector(".enter-weight");
+
+    document.querySelector(".add-product-btn")?.addEventListener("click", (event) => {
+    // event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    // document.querySelector(".customer-dropdown").value = enterCustomerName.value
+
+    // Prepare the request body as a JSON object
+    const requestBody = {
+        name: enterProductName.value, // Capture the value from the input field
+        netWeight: enterWeight.value
+    };
+
+    fetch("http://localhost:5000/api/Product/Add", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Specify the content type as JSON
+        },
+        body: JSON.stringify(requestBody) // Convert the JavaScript object to a JSON string
+    })
+    .then(res => {
+        if (!res.ok) {
+            console.log("Problem");
+            return;
+        }
+        return res.json(); // Parse the response as JSON
+    })
+    .then(data => {
+        console.log(data); // Log the response data
+    })
+    .catch(err => {
+        console.log(err); // Log any errors
+    });
+});
 });
 
 
@@ -466,32 +559,92 @@ document.querySelectorAll(".add-operation-weight").forEach(input => {
 });
 
 
-// Product Dropdown Menu for first row
-const productDropdown = document.querySelector(".product-dropdown")
-fetch("http://localhost:5000/api/Product/GetProductsDropdown")
-.then(response => response.json())
-.then(posts => {
-    console.log(posts);
-    let code = `<option value="" selected disabled hidden ></option>`
-    posts.forEach(function (item) {
-        code += `<option class="prod-id" value="${item.id}"><a href="#">${item.name}</a></option>`
-    })
-    productDropdown.innerHTML = code
-})
+// // Product Dropdown Menu for first row
+// const productDropdown = document.querySelector(".product-dropdown")
+// fetch("http://localhost:5000/api/Product/GetProductsDropdown")
+// .then(response => response.json())
+// .then(posts => {
+//     console.log(posts);
+//     let code = `<option value="" selected disabled hidden ></option>`
+//     code +=`<option class="add-new-product-dropdown" value="add-product" style="background-color: black; color: white">✚</option>`
+//     console.log(code);
+//     posts.forEach(function (item) {
+//         code += `<option class="prod-id" value="${item.id}"><a href="#">${item.name}</a></option>`
+//     })
+//     console.log(code);
+//     productDropdown.innerHTML = code
+// })
 
 
+// // Add event listener to check the selected value
+// productDropdown.addEventListener("change", function() {
+//     let selectedValue = productDropdown.value;
+//     console.log("Selected value:", selectedValue);
+
+//     if (selectedValue === "add-product") {
+//         console.log("Add new product option selected");
+//         document.querySelector(".add-product-overlay").style.display = "block"
+//         document.querySelector(".add-product-modal").style.display = "block"
+//         document.querySelector(".add-product-overlay").addEventListener("click", () => {
+//             document.querySelector(".add-product-overlay").style.display = "none"
+//             document.querySelector(".add-product-modal").style.display = "none"
+//         })
+
+//     } else {
+//         console.log("Selected product ID:", selectedValue);
+//     }
+// });
+
+// const enterProductName = document.querySelector(".enter-product-name");
+// const enterWeight = document.querySelector(".enter-weight");
+
+//     document.querySelector(".add-product-btn")?.addEventListener("click", (event) => {
+//     // event.preventDefault(); // Prevent the form from submitting the traditional way
+
+//     // document.querySelector(".customer-dropdown").value = enterCustomerName.value
+
+//     // Prepare the request body as a JSON object
+//     const requestBody = {
+//         name: enterProductName.value, // Capture the value from the input field
+//         netWeight: enterWeight.value
+//     };
+
+//     fetch("http://localhost:5000/api/Product/Add", {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json' // Specify the content type as JSON
+//         },
+//         body: JSON.stringify(requestBody) // Convert the JavaScript object to a JSON string
+//     })
+//     .then(res => {
+//         if (!res.ok) {
+//             console.log("Problem");
+//             return;
+//         }
+//         return res.json(); // Parse the response as JSON
+//     })
+//     .then(data => {
+//         console.log(data); // Log the response data
+//     })
+//     .catch(err => {
+//         console.log(err); // Log any errors
+//     });
+// });
+
+
+// Bunla işləyirdi, amma olmalı deyildi işləməsə commentdən çıxarmaq lazım olacaq. 
 // Executor Dropdown Menu for first row
-const executorDropdown = document.querySelector(".executor-dropdown")
-fetch("http://localhost:5000/api/Employee/GetEmployeesDropdown")
-.then(response => response.json())
-.then(posts => {
-    console.log(posts);
-    let code = `<option value="" selected disabled hidden ></option>`
-    posts.forEach(function (item) {
-        code += `<option value="${item.id}">${item.name}</option>`
-    })
-    executorDropdown.innerHTML = code
-})
+// const executorDropdown = document.querySelector(".executor-dropdown")
+// fetch("http://localhost:5000/api/Employee/GetEmployeesDropdown")
+// .then(response => response.json())
+// .then(posts => {
+//     console.log(posts);
+//     let code = `<option value="" selected disabled hidden ></option>`
+//     posts.forEach(function (item) {
+//         code += `<option value="${item.id}">${item.name}</option>`
+//     })
+//     executorDropdown.innerHTML = code
+// })
 
 
 // Delete row 
