@@ -89,17 +89,41 @@ const tbody = document.querySelector("tbody");
 //     localStorage.setItem("userid",id)  
 // }
 
+
+let workers = []
+function sortWorkerName(workerName){
+    
+    workers.push(workerName)
+    // console.log(workers);
+
+    workers.sort((a, b) => a.localeCompare(b, 'az', { sensitivity: 'base' }));
+    // console.log(workers);
+
+    return workers
+}
+
+
 // Fetch and render data
 fetch("http://localhost:5000/api/Worker/GetWorkers")
     .then(response => response.json())
     .then(posts => {
         let code = "";
-        posts.forEach(item => {
-            console.log(item.id);
+
+
+        posts.forEach(post => {
+            sortWorkerName(post.name)
+        })
+
+        console.log(workers);
+
+
+        workers.forEach(workerName => {
+            const worker = posts.find(post => post.name === workerName)  
+            console.log(worker);
             code += `
-                <tr class="worker-row" data-id="${item.id}" onclick="addId(${item.id})">
-                    <td>${item.name}</td>
-                    <td>${item.salary}</td>
+                <tr class="worker-row" data-id="${worker.id}" onclick="addId(${worker.id})">
+                    <td>${worker.name}</td>
+                    <td>${worker.salary}</td>
                     <td><i class="fa-solid fa-pencil edit-icon"></i></td>
                     <td><i class="fa-solid fa-trash-can delete-icon"></i></td>
                 </tr>`;

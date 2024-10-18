@@ -68,6 +68,17 @@ function filterTable() {
 
 
 
+let executors = []
+function sortExecutorsName(executorsName){
+
+    executors.push(executorsName)
+
+    executors.sort((a, b) => a.localeCompare(b, 'az', { sensitivity: 'base' }));
+
+    return executors
+}
+
+
 
 // Fetch and display the employees in the table
 // GET Method
@@ -78,11 +89,23 @@ fetch("http://localhost:5000/api/Employee/GetEmployees")
     .then(posts => {
         console.log(posts);
         let code = "";
-        posts.employees.forEach(function (item) {
+
+
+        posts.employees.forEach(post => {
+            sortExecutorsName(post.name)
+        })
+
+        console.log(executors);
+
+
+        executors.forEach(executorName => {
+
+            const executor = posts.employees.find(post => post.name === executorName)
+
             code += `
-                <tr class="executor-row"  data-id="${item.id}">
-                    <td>${item.name}</td>
-                    <td>${item.caseAmount}</td>
+                <tr class="executor-row"  data-id="${executor.id}">
+                    <td>${executor.name}</td>
+                    <td>${executor.caseAmount}</td>
                     <td><i class="fa-solid fa-pencil edit-icon"></i></td>
                     <td><i class="fa-solid fa-trash-can delete-icon"></i></td>
                 </tr>`;

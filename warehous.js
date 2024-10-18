@@ -82,6 +82,19 @@ const no = document.querySelector(".no")
 const productRow = document.querySelectorAll(".product-row") 
 
 
+// Sort products for alphabetic
+let products = []
+
+function sortProductName(productName){
+    products.push(productName)
+
+    products.sort((a, b) => a.localeCompare(b, 'az', { sensitivity: 'base' }));
+
+    return products
+}
+
+
+
 function addId(id){
     console.log(id);
     localStorage.setItem("productId",id)  
@@ -95,11 +108,22 @@ fetch("http://localhost:5000/api/Product/GetProducts")
 .then(posts => {
     console.log(posts);
     let code = ""
-    posts.forEach(function (item) {
+
+
+    posts.forEach(post => {
+        sortProductName(post.name)
+    })
+
+    console.log(products);
+
+
+    products.forEach( productName => {
+        const product = posts.find( post => post.name === productName)
+        console.log(product);
         code += `
-               <tr class = "product-row" data-id="${item.id}" onclick="addId(${item.id})">
-                <td class="prod-name" ><a href="product.html">${item.name}</a></td>
-                <td>${item.netWeight}</td>
+               <tr class = "product-row" data-id="${product.id}" onclick="addId(${product.id})">
+                <td class="prod-name" ><a href="product.html">${product.name}</a></td>
+                <td>${product.netWeight}</td>
                 <td><i class="fa-solid fa-pencil edit-icon"></i></td>
                 <td><i class="fa-solid fa-trash-can delete-icon"></i></td>
               </tr>`

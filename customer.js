@@ -83,6 +83,17 @@ const editCustomerBtn = document.querySelector(".edit-customer-btn");
 const tbody = document.querySelector("tbody");
 
 
+let customers = []
+function sortCustomerName(customerName){
+    
+    customers.push(customerName)
+    // console.log(customers);
+
+    customers.sort((a, b) => a.localeCompare(b, 'az', { sensitivity: 'base' }));
+    // console.log(customers);
+
+    return customers
+}
 
 function addId(id){
     console.log(id);
@@ -94,16 +105,25 @@ fetch("http://localhost:5000/api/Person/GetPersons")
     .then(response => response.json())
     .then(posts => {
         let code = "";
+        
         posts.forEach(item => {
-            console.log(item.id);
+            sortCustomerName(item.name);
+        });
+
+        console.log(customers);
+
+        customers.forEach((customerName) => {
+            const customer = posts.find(post => post.name === customerName);
+            console.log(customer);
             code += `
-                <tr class="customer-row" data-id="${item.id}" onclick="addId(${item.id})">
-                    <td><a href="all-operations.html">${item.name}</a></td>
-                    <td><a href="all-operations.html">${item.money}</a></td>
+                <tr class="customer-row" data-id="${customer.id}" onclick="addId(${customer.id})">
+                    <td><a href="all-operations.html">${customerName}</a></td>
+                    <td><a href="all-operations.html">${customer.money}</a></td>
                     <td><i class="fa-solid fa-pencil edit-icon"></i></td>
                     <td><i class="fa-solid fa-trash-can delete-icon"></i></td>
                 </tr>`;
         });
+
         tbody.innerHTML = code;
 
         // Attach DELETE and EDIT event listeners after rows are rendered

@@ -145,6 +145,13 @@ const enterCustomerName = document.querySelector(".enter-customer-name");
     .catch(err => {
         console.log(err); // Log any errors
     });
+
+    // document.querySelector("add-operation-specially-overlay").style.display = "block"
+    // document.querySelector("add-operation-specially").style.display = "flex"
+
+
+    // addOperationSpeciallyOverlay.style.display = "block"
+    // addOperationSpecially.style.display = "flex"
 });
 
 
