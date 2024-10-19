@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
             switch (selectedOption) {
                 case "1":
                 case "2":
+                    customerDropdown.disabled = false;
                     receivedMoney.disabled = true;
                     givenMoney.disabled = true;
                     selectExecutor.disabled = true;
@@ -95,14 +96,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     addPrice.disabled = false;
                     // addAmount.disabled = false;
                     // addNetAmount.disabled = false;
+                    customerDropdown.value = "";
+                    receivedMoney.value = "";
+                    givenMoney.value = "";
+                    selectExecutor.value = "";
+                    selectProduct.value = "";
+                    addWeight.value = ""
+                    addDeductedWeight.value = "";
+                    workerDropdown.value = "";
+                    addInfo.value = "";
+                    addDeductedPercentage.value = "";
+                    addPrice.value = "";
                     break;
                 case "3":
+                    customerDropdown.disabled = false;
                     receivedMoney.disabled = false;
                     givenMoney.disabled = true;
                     selectExecutor.disabled = false;
                     selectProduct.disabled = true;
                     addWeight.disabled = true;
                     addDeductedWeight.disabled = true;
+                    addDeductedWeight.value = "";
                     workerDropdown.disabled = true;
                     addInfo.disabled = true;
                     // addRemainWeight.disabled = true;
@@ -111,8 +125,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     addPrice.disabled = true;
                     // addAmount.disabled = true;
                     // addNetAmount.disabled = true;
+                    customerDropdown.value = "";
+                    receivedMoney.value = "";
+                    givenMoney.value = "";
+                    selectExecutor.value = "";
+                    selectProduct.value = "";
+                    addWeight.value = ""
+                    addDeductedWeight.value = "";
+                    workerDropdown.value = "";
+                    addInfo.value = "";
+                    addDeductedPercentage.value = "";
+                    addPrice.value = "";
                     break;
                 case "4":
+                    customerDropdown.disabled = false;
                     receivedMoney.disabled = true;
                     givenMoney.disabled = false;
                     selectExecutor.disabled = false;
@@ -127,9 +153,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     addPrice.disabled = true;
                     // addAmount.disabled = true;
                     // addNetAmount.disabled = true;
+                    customerDropdown.value = "";
+                    receivedMoney.value = "";
+                    givenMoney.value = "";
+                    selectExecutor.value = "";
+                    selectProduct.value = "";
+                    addWeight.value = ""
+                    addDeductedWeight.value = "";
+                    workerDropdown.value = "";
+                    addInfo.value = "";
+                    addDeductedPercentage.value = "";
+                    addPrice.value = "";
                     break;
                 case "5":
-                    customerDropdown.disabled = true
+                    customerDropdown.disabled = true;
                     receivedMoney.disabled = true;
                     givenMoney.disabled = false;
                     selectExecutor.disabled = false;
@@ -144,9 +181,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     addPrice.disabled = true;
                     // addAmount.disabled = true;
                     // addNetAmount.disabled = true;
+                    customerDropdown.value = "";
+                    receivedMoney.value = "";
+                    givenMoney.value = "";
+                    selectExecutor.value = "";
+                    selectProduct.value = "";
+                    addWeight.value = ""
+                    addDeductedWeight.value = "";
+                    workerDropdown.value = "";
+                    addInfo.value = "";
+                    addDeductedPercentage.value = "";
+                    addPrice.value = "";
                     break;   
                 case "6":
-                    customerDropdown.disabled = true
+                    customerDropdown.disabled = true;
                     receivedMoney.disabled = true;
                     givenMoney.disabled = false;
                     selectExecutor.disabled = false;
@@ -161,6 +209,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     addPrice.disabled = true;
                     // addAmount.disabled = true;
                     // addNetAmount.disabled = true;
+                    customerDropdown.value = "";
+                    receivedMoney.value = "";
+                    givenMoney.value = "";
+                    selectExecutor.value = "";
+                    selectProduct.value = "";
+                    addWeight.value = ""
+                    addDeductedWeight.value = "";
+                    workerDropdown.value = "";
+                    addInfo.value = "";
+                    addDeductedPercentage.value = "";
+                    addPrice.value = "";
                     break;
                 default:
                     // Enable all fields by default
@@ -178,6 +237,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     addPrice.disabled = false;
                     // addAmount.disabled = false;
                     // addNetAmount.disabled = false;
+                    customerDropdown.value = "";
+                    receivedMoney.value = "";
+                    givenMoney.value = "";
+                    selectExecutor.value = "";
+                    selectProduct.value = "";
+                    addWeight.value = ""
+                    addDeductedWeight.value = "";
+                    workerDropdown.value = "";
+                    addInfo.value = "";
+                    addDeductedPercentage.value = "";
+                    addPrice.value = "";
                     break;
             }
         });
