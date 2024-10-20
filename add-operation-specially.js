@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json())
             .then(posts => {
                 let options = '<option value="" selected disabled hidden ></option>';
-                options += `<option class="add-new-product-dropdown" value="add-product" style="background-color: black; color: white">✚</option>`
+                // options += `<option class="add-new-product-dropdown" value="add-product" style="background-color: black; color: white">✚</option>`
                 posts.forEach(item => {
                     options += `<option value="${item.id}">${item.name}</option>`;
                 });
