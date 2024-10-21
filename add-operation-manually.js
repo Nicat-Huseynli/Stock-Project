@@ -353,6 +353,14 @@ const addRow = () => {
     //     }
     // }
 
+    // const addInfoInput = newRow.querySelector(".add-info");
+
+    //  // Add event listener to inputs to detect changes
+    //  addInfoInput.addEventListener("input", (e) => {
+    //     console.log("Info input value:", e.target.value);
+    // });
+
+
     // Populate dropdowns
     populateDropdown(newRow.querySelector(".customer-dropdown"), "http://localhost:5000/api/Person/GetPersonsDropdown");
     populateDropdown(newRow.querySelector(".product-dropdown"), "http://localhost:5000/api/Product/GetProductsDropdown");
@@ -369,9 +377,13 @@ const addRow = () => {
         deleteOverlay.style.display = "block";
         deleteModal.style.display = "block";
     });
+
+    // Attach the click event to .add-info inside the new row
+    newRow.querySelector(".add-info").addEventListener("click", () => {
+        document.querySelector(".add-info-modal").style.display = "block";
+        document.querySelector(".add-info-overlay").style.display = "block";
+    });
 };
-
-
 
 
     // Event listener for the "Yes" button to confirm deletion
@@ -1130,10 +1142,17 @@ infoText.addEventListener("change", (e)=> {
 
 
 
-document.querySelector(".add-info").addEventListener("click", ()=> {
+// document.querySelector(".add-info").addEventListener("click", ()=> {
+//     document.querySelector(".add-info-modal").style.display = "block"
+//     document.querySelector(".add-info-overlay").style.display = "block"
+// })
+
+
+document.querySelectorAll(".add-info").forEach(info => info.addEventListener("click", ()=> {
     document.querySelector(".add-info-modal").style.display = "block"
     document.querySelector(".add-info-overlay").style.display = "block"
-})
+}))
+
 
 document.querySelector(".add-info-overlay").addEventListener("click", ()=> {
     document.querySelector(".add-info-modal").style.display = "none"
@@ -1230,9 +1249,9 @@ document.querySelector(".save-operation-btn").addEventListener("click", (e) => {
         // Add only non-zero or valid values to the request body
         requestBody.push({
             operationTypeId: selectedValue != 0 ? selectedValue : 0,
-            personId: selectedCustomer != 0 ? selectedCustomer : 0,
-            productId: selectedProduct != 0 ? selectedProduct : 0,
-            employeeId: selectedExecutor != 0 ? selectedExecutor : 0,
+            personId: selectedCustomer != 0 ? selectedCustomer : "1",
+            productId: selectedProduct != 0 ? selectedProduct : "1",
+            employeeId: selectedExecutor != 0 ? selectedExecutor : "1",
             workerId: selectedWorker != 0 ? selectedWorker : 0,
             weight: selectedWeight != 0 ? selectedWeight : 0,
             deductedWeight: selectedDeductedWeight != 0 ? selectedDeductedWeight : 0,
