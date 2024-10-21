@@ -393,11 +393,11 @@ function attachEditEventListeners() {
                 document.querySelector(".edit-deductedWeight-div").removeAttribute("hidden");
                 document.querySelector(".edit-deductedPercentage-div").removeAttribute("hidden");
                 document.querySelector(".edit-pricePerUnit-div").removeAttribute("hidden");
-                document.querySelector(".edit-moneyGive-div").removeAttribute("hidden");
+                document.querySelector(".edit-moneyGive-div").setAttribute("hidden", true);
 
 
-                document.querySelector(".edit-customer-modal").style.top = "10%"
-                document.querySelector(".edit-customer-modal").style.height = "75vh"
+                document.querySelector(".edit-customer-modal").style.top = "15%"
+                document.querySelector(".edit-customer-modal").style.height = "65vh"
                 document.querySelector(".edit-form").style.top = "7%"
             }
             else if(operationType === "Pul almaq"){
@@ -471,7 +471,7 @@ function attachEditEventListeners() {
                 row.querySelector("td:nth-child(8)").textContent = updatedDeductedWeight;
                 row.querySelector("td:nth-child(10)").textContent = updatedDeductedPercentage;
                 row.querySelector("td:nth-child(12)").textContent = updatedPricePerUnit;
-                row.querySelector("td:nth-child(15)").textContent = updatedMoneyGive;
+                // row.querySelector("td:nth-child(15)").textContent = updatedMoneyGive;
                 row.querySelector("td:nth-child(16)").textContent = updatedMoneyGet
                 
                 // document.querySelector(".edit-moneyGive").setAttribute("hidden", true)

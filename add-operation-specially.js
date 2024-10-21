@@ -355,13 +355,13 @@ const enterWeight = document.querySelector(".enter-weight");
 
 
 document.querySelector(".save-operation-btn").addEventListener("click", (e) => {
-    
     e.preventDefault();
 
     // Collect all the operation rows
     const operationRows = document.querySelectorAll(".operation-row");
 
     let requestBody = [];
+    let invalidInputs = false; // To track if there are invalid inputs
 
     // Loop through each operation row to gather data
     operationRows.forEach((row) => {
@@ -376,37 +376,64 @@ document.querySelector(".save-operation-btn").addEventListener("click", (e) => {
         const addGivenMoney = row.querySelector(".add-given-money");
         const addReceivedMoney = row.querySelector(".add-received-money");
 
-        // Extract values for each row
-        const selectedValue = selectElement.value;
-        const selectedCustomer = customerDropdown.value;
-        const selectedProduct = productDropdown.value;
-        const selectedExecutor = executorDropdown.value;
-        const selectedWeight = addWeight.value;
-        const selectedDeductedWeight = addDeductedWeight.value;
-        const selectedDeductedPercentage = addDeductedPercentage.value;
-        const selectedPrice = addPrice.value;
-        const selectedGivenMoney = addGivenMoney.value;
-        const selectedReceivedMoney = addReceivedMoney.value;
+        // Check each input field (if it's not disabled) and flag errors
+        if (!checkInput(selectElement, "Operation Type")) invalidInputs = true;
+        if (!checkInput(customerDropdown, "Customer")) invalidInputs = true;
+        if (!checkInput(productDropdown, "Product")) invalidInputs = true;
+        if (!checkInput(executorDropdown, "Executor")) invalidInputs = true;
+        if (!checkInput(addWeight, "Weight")) invalidInputs = true;
+        if (!checkInput(addDeductedWeight, "Deducted Weight")) invalidInputs = true;
+        if (!checkInput(addDeductedPercentage, "Deducted Percentage")) invalidInputs = true;
+        if (!checkInput(addPrice, "Price")) invalidInputs = true;
+        if (!checkInput(addGivenMoney, "Given Money")) invalidInputs = true;
+        if (!checkInput(addReceivedMoney, "Received Money")) invalidInputs = true;
 
-        // Push the operation data into the requestBody array
-        requestBody.push({
-            operationTypeId: selectedValue != 0 ? selectedValue : 0,
-            personId: selectedCustomer != 0 ? selectedCustomer : "1",
-            productId: selectedProduct != 0 ? selectedProduct : "1",
-            employeeId: selectedExecutor != 0 ? selectedExecutor : "1",
-            weight: selectedWeight != 0 ? selectedWeight : 0,
-            deductedWeight: selectedDeductedWeight != 0 ? selectedDeductedWeight : 0,
-            deductedPercentage: selectedDeductedPercentage != 0 ? selectedDeductedPercentage : 0,
-            pricePerUnit: selectedPrice != 0 ? selectedPrice : 0,
-            moneyGive: selectedGivenMoney != 0 ? selectedGivenMoney : 0,
-            moneyGet: selectedReceivedMoney != 0 ? selectedReceivedMoney : 0
-            // isGift: true
-        });
+        // If no invalid inputs, prepare requestBody
+        if (!invalidInputs) {
+            const selectedValue = selectElement.value;
+            const selectedCustomer = customerDropdown.value;
+            const selectedProduct = productDropdown.value;
+            const selectedExecutor = executorDropdown.value;
+            const selectedWeight = addWeight.value;
+            const selectedDeductedWeight = addDeductedWeight.value;
+            const selectedDeductedPercentage = addDeductedPercentage.value;
+            const selectedPrice = addPrice.value;
+            const selectedGivenMoney = addGivenMoney.value;
+            const selectedReceivedMoney = addReceivedMoney.value;
+
+            // Push the operation data into the requestBody array
+            requestBody.push({
+                operationTypeId: selectedValue != 0 ? selectedValue : 0,
+                personId: selectedCustomer != 0 ? selectedCustomer : "1",
+                productId: selectedProduct != 0 ? selectedProduct : "1",
+                employeeId: selectedExecutor != 0 ? selectedExecutor : "1",
+                weight: selectedWeight != 0 ? selectedWeight : 0,
+                deductedWeight: selectedDeductedWeight != 0 ? selectedDeductedWeight : 0,
+                deductedPercentage: selectedDeductedPercentage != 0 ? selectedDeductedPercentage : 0,
+                pricePerUnit: selectedPrice != 0 ? selectedPrice : 0,
+                moneyGive: selectedGivenMoney != 0 ? selectedGivenMoney : 0,
+                moneyGet: selectedReceivedMoney != 0 ? selectedReceivedMoney : 0
+            });
+        }
     });
 
-    // Log the request body to check the data
-    console.log("Request body:", JSON.stringify(requestBody));
-    console.log(requestBody);
+    if (invalidInputs) {
+        // alert("Please fill all required fields before saving.");
+        document.querySelector('.input-error-modal').style.display = "flex"
+        document.querySelector(".input-error-overlay").style.display = "block"
+
+        document.querySelector(".input-error-overlay").addEventListener("click", ()=> {
+            document.querySelector('.input-error-modal').style.display = "none"
+            document.querySelector(".input-error-overlay").style.display = "none"
+        })        
+
+        document.querySelector(".fa-xmark").addEventListener("click", ()=> {
+            document.querySelector('.input-error-modal').style.display = "none"
+            document.querySelector(".input-error-overlay").style.display = "none"
+        })        
+        
+        return; // Stop here if any input was invalid
+    }
 
     // Now that we have an array of operations, we send them all at once
     fetch("http://localhost:5000/api/Operation/AddOperation", {
@@ -425,7 +452,6 @@ document.querySelector(".save-operation-btn").addEventListener("click", (e) => {
     })
     .then(data => {
         console.log("Operations added successfully:", data); // Log the response data
-
         window.location.href = "index.html";
     })
     .catch(err => {
@@ -433,7 +459,16 @@ document.querySelector(".save-operation-btn").addEventListener("click", (e) => {
     });
 });
 
-
+// Function to check if the input is disabled and its value
+function checkInput(inputElement, fieldName){
+    if (!inputElement.disabled) {
+        if (inputElement.value == 0 || inputElement.value === "1") {
+            console.log(`Please fill the ${fieldName} field.`);
+            return false; // Invalid input
+        }
+    }
+    return true; // Valid input or disabled field
+}
 
 
 // document.querySelector(".save-operation-btn").addEventListener("click", (e) => {

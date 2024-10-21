@@ -322,36 +322,36 @@ const addRow = () => {
     tbody.appendChild(newRow);
 
     // Check if the first row's operation value is 5
-    const firstRowOperation = document.querySelector(".operation-row:first-child .operation-name");
-    if (firstRowOperation && firstRowOperation.value === "5") {
-        // const newRowOperation = newRow.querySelector(".operation-name");
-        tbody.removeChild(newRow);
+    // const firstRowOperation = document.querySelector(".operation-row:first-child .operation-name");
+    // if (firstRowOperation && firstRowOperation.value === "5") {
+    //     // const newRowOperation = newRow.querySelector(".operation-name");
+    //     tbody.removeChild(newRow);
 
-        // newRowOperation.value = "5";  // Set value to 5
-        // newRowOperation.disabled = true;  // Disable the dropdown
-    } else {
-        const newRowOperation = newRow.querySelector(".operation-name");
-        const optionFive = newRowOperation.querySelector('option[value="5"]');
-        if (optionFive) {
-            optionFive.remove();  // Remove the option with value "5"
-        }
-    }
+    //     // newRowOperation.value = "5";  // Set value to 5
+    //     // newRowOperation.disabled = true;  // Disable the dropdown
+    // } else {
+    //     const newRowOperation = newRow.querySelector(".operation-name");
+    //     const optionFive = newRowOperation.querySelector('option[value="5"]');
+    //     if (optionFive) {
+    //         optionFive.remove();  // Remove the option with value "5"
+    //     }
+    // }
 
 
-    if (firstRowOperation && firstRowOperation.value === "6") {
+    // if (firstRowOperation && firstRowOperation.value === "6") {
 
-        tbody.removeChild(newRow);
-        // const newRowOperation = newRow.querySelector(".operation-name");
-        // newRowOperation.value = "6";  // Set value to 5
-        // newRowOperation.disabled = true;  // Disable the dropdown
-    } 
-    else {
-        const newRowOperation = newRow.querySelector(".operation-name");
-        const optionSix = newRowOperation.querySelector('option[value="6"]');
-        if (optionSix) {
-            optionSix.remove();  // Remove the option with value "6"
-        }
-    }
+    //     tbody.removeChild(newRow);
+    //     // const newRowOperation = newRow.querySelector(".operation-name");
+    //     // newRowOperation.value = "6";  // Set value to 5
+    //     // newRowOperation.disabled = true;  // Disable the dropdown
+    // } 
+    // else {
+    //     const newRowOperation = newRow.querySelector(".operation-name");
+    //     const optionSix = newRowOperation.querySelector('option[value="6"]');
+    //     if (optionSix) {
+    //         optionSix.remove();  // Remove the option with value "6"
+    //     }
+    // }
 
     // Populate dropdowns
     populateDropdown(newRow.querySelector(".customer-dropdown"), "http://localhost:5000/api/Person/GetPersonsDropdown");
@@ -1105,6 +1105,28 @@ infoText.addEventListener("change", (e)=> {
 // Function to send save request to the server
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// For all addInfo 
+// document.querySelectorAll(".add-info").forEach(info => {
+//     info.addEventListener("click", ()=> {
+//         document.querySelector(".add-info-modal").style.display = "block"
+//         document.querySelector(".add-info-overlay").style.display = "block"
+//     })
+// })
+
+// document.querySelector(".add-info-overlay").addEventListener("click", ()=> {
+//     document.querySelector(".add-info-modal").style.display = "none"
+//     document.querySelector(".add-info-overlay").style.display = "none"
+// })
+
+// document.querySelector("#add-info-form").addEventListener("submit", (e)=> {
+
+//     e.preventDefault()
+
+//     document.querySelector(".add-info").value = document.querySelector(".info-text").value 
+//     document.querySelector(".add-info-modal").style.display = "none"
+//     document.querySelector(".add-info-overlay").style.display = "none"
+// })
 
 
 
@@ -1136,6 +1158,7 @@ document.querySelector(".save-operation-btn").addEventListener("click", (e) => {
     const operationRows = document.querySelectorAll(".operation-row");
 
     let requestBody = [];
+    let invalidInputs = false; // To track if there are invalid inputs
     // let showModal = false; // Flag to track if we need to show the modal
 
     // Loop through each operation row to gather data
@@ -1144,14 +1167,14 @@ document.querySelector(".save-operation-btn").addEventListener("click", (e) => {
         const customerDropdown = row.querySelector(".customer-dropdown");
         const productDropdown = row.querySelector(".product-dropdown");
         const executorDropdown = row.querySelector(".executor-dropdown");
-        const workerDropdown = row.querySelector(".worker-dropdown");
+        const workerDropdown = row.querySelector(".worker-dropdown")
         const addWeight = row.querySelector(".add-weight");
         const addDeductedWeight = row.querySelector(".add-deducted-weight");
         const addDeductedPercentage = row.querySelector(".add-deducted-percentage");
         const addPrice = row.querySelector(".add-price");
         const addGivenMoney = row.querySelector(".add-given-money");
         const addReceivedMoney = row.querySelector(".add-received-money");
-        const adddInfo = row.querySelector(".add-info");
+        const addInfo = row.querySelector(".add-info");
 
         // Extract values for each row
         const selectedValue = selectElement.value;
@@ -1165,7 +1188,39 @@ document.querySelector(".save-operation-btn").addEventListener("click", (e) => {
         const selectedPrice = addPrice.value;
         const selectedGivenMoney = addGivenMoney.value;
         const selectedReceivedMoney = addReceivedMoney.value;
-        const addedInfo = adddInfo.value;
+        const addedInfo = addInfo.value;
+
+
+        // Check each input field (if it's not disabled) and flag errors
+        if (!checkInput(selectElement, "Operation Type")) invalidInputs = true;
+        if (!checkInput(customerDropdown, "Customer")) invalidInputs = true;
+        if (!checkInput(productDropdown, "Product")) invalidInputs = true;
+        if (!checkInput(executorDropdown, "Executor")) invalidInputs = true;
+        if (!checkInput(workerDropdown, "Worker")) invalidInputs = true;
+        if (!checkInput(addWeight, "Weight")) invalidInputs = true;
+        if (!checkInput(addDeductedWeight, "Deducted Weight")) invalidInputs = true;
+        if (!checkInput(addDeductedPercentage, "Deducted Percentage")) invalidInputs = true;
+        if (!checkInput(addPrice, "Price")) invalidInputs = true;
+        if (!checkInput(addGivenMoney, "Given Money")) invalidInputs = true;
+        if (!checkInput(addReceivedMoney, "Received Money")) invalidInputs = true;
+        if (!checkInput(addInfo, "Add İnfo")) invalidInputs = true;
+
+
+        // If no invalid inputs, prepare requestBody
+        if (!invalidInputs) {
+            const selectedValue = selectElement.value;
+            const selectedCustomer = customerDropdown.value;
+            const selectedProduct = productDropdown.value;
+            const selectedExecutor = executorDropdown.value;
+            const selectedWorker = workerDropdown.value;
+            const selectedWeight = addWeight.value;
+            const selectedDeductedWeight = addDeductedWeight.value;
+            const selectedDeductedPercentage = addDeductedPercentage.value;
+            const selectedPrice = addPrice.value;
+            const selectedGivenMoney = addGivenMoney.value;
+            const selectedReceivedMoney = addReceivedMoney.value;
+            const addedInfo = addInfo.value;
+
 
         // Check if the operation value is equal to 5 (Rasxod)
         // if (selectedValue == 5) {
@@ -1187,12 +1242,40 @@ document.querySelector(".save-operation-btn").addEventListener("click", (e) => {
             moneyGet: selectedReceivedMoney != 0 ? selectedReceivedMoney : 0,
             addInfo: addedInfo != "" ? addedInfo : ""  // Placeholder, will be updated in modal if needed
         });
+    }
     });
+
+    if (invalidInputs) {
+        // alert("Please fill all required fields before saving.");
+        document.querySelector('.input-error-modal').style.display = "flex"
+        document.querySelector(".input-error-overlay").style.display = "block"
+
+        document.querySelector(".input-error-overlay").addEventListener("click", ()=> {
+            document.querySelector('.input-error-modal').style.display = "none"
+            document.querySelector(".input-error-overlay").style.display = "none"
+        })        
+
+        document.querySelector(".fa-xmark").addEventListener("click", ()=> {
+            document.querySelector('.input-error-modal').style.display = "none"
+            document.querySelector(".input-error-overlay").style.display = "none"
+        })        
+        
+        return; // Stop here if any input was invalid
+    }
 
     sendSaveRequest(requestBody);
 });
 
-
+// Function to check if the input is disabled and its value
+function checkInput(inputElement, fieldName){
+    if (!inputElement.disabled) {
+        if (inputElement.value == 0 || inputElement.value === "1") {
+            console.log(`Please fill the ${fieldName} field.`);
+            return false; // Invalid input
+        }
+    }
+    return true; // Valid input or disabled field
+}
 
 
 const sendSaveRequest = (requestBody) => {

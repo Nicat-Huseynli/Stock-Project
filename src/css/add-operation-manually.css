@@ -85,7 +85,8 @@ tbody{
     margin-left: -15px;
 }
 
-.add-info-overlay{
+.add-info-overlay,
+.input-error-overlay{
     display: none;
     position: fixed;
     top: 0;
@@ -146,6 +147,49 @@ tbody{
         }
 }
 
+.input-error-modal{
+    display: none;
+    position: fixed;
+    top: 35%;
+    left: 26%;
+    width: 50%;
+    height: 20vh;
+    z-index: 60;
+    background-color: white;
+    color: black;
+    border-radius: 7px;
+    box-shadow: 0 0 10px rgb(86, 86, 86);
+    padding: 55px;
+    
+    p{
+        color: red;
+        font-weight: 500;
+        font-size: 20px;
+    }
+
+    .fa-xmark{
+        position: absolute;
+        margin-top: -40px;
+        right: 20px;
+        font-size: 22px;
+    }
+    
+    button{
+        cursor: pointer;
+        padding: 10px 30px;
+        border: 1px solid black;
+        background: black;
+        color: white;
+        font-weight: 550;
+        resize: none;
+        align-self: flex-end;
+    }
+
+    button:hover{
+        background: white;
+        color: black;
+    }
+}
 
 .add-customer-overlay,
 .add-product-overlay,
