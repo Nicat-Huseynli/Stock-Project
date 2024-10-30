@@ -257,19 +257,27 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Function to fetch and populate dropdown options
-    // Function to fetch and populate dropdown options
+// Function to fetch and populate dropdown options alphabetically
 const populateDropdown = (dropdown, url) => {
     fetch(url)
         .then(response => response.json())
         .then(posts => {
-            let options = '<option value="" hidden></option>'; // Add an empty hidden option
+            // Sort posts alphabetically by name
+            posts.sort((a, b) => a.name.localeCompare(b.name, 'az', { sensitivity: 'base' }));
+
+            // Initialize with an empty hidden option
+            let options = '<option value="" hidden></option>'; 
+
+            // Append each sorted item to options
             posts.forEach(item => {
                 options += `<option value="${item.id}">${item.name}</option>`;
             });
+
             dropdown.innerHTML = options;
         })
         .catch(err => console.error(`Failed to fetch data from ${url}:`, err));
 };
+
 
 // Function to add a new row to the table
 const addRow = () => {
@@ -318,23 +326,25 @@ const addRow = () => {
         <td><i class="fa-solid fa-trash-can"></i></td>
     `;
 
+
+
     // Append the new row to the table body
     tbody.appendChild(newRow);
 
     // Check if the first row's operation value is 5
-    // const firstRowOperation = document.querySelector(".operation-row:first-child .operation-name");
+    const firstRowOperation = document.querySelector(".operation-row:first-child .operation-name");
     // if (firstRowOperation && firstRowOperation.value === "5") {
-    //     // const newRowOperation = newRow.querySelector(".operation-name");
-    //     tbody.removeChild(newRow);
+    //     const newRowOperation = newRow.querySelector(".operation-name");
+    //     // tbody.removeChild(newRow);
 
     //     // newRowOperation.value = "5";  // Set value to 5
-    //     // newRowOperation.disabled = true;  // Disable the dropdown
+    //     newRowOperation.disabled = true;  // Disable the dropdown
     // } else {
-    //     const newRowOperation = newRow.querySelector(".operation-name");
-    //     const optionFive = newRowOperation.querySelector('option[value="5"]');
-    //     if (optionFive) {
-    //         optionFive.remove();  // Remove the option with value "5"
-    //     }
+        const newRowOperation = newRow.querySelector(".operation-name");
+        const optionFive = newRowOperation.querySelector('option[value="5"]');
+        if (optionFive) {
+            optionFive.remove();  // Remove the option with value "5"
+        }
     // }
 
 
@@ -378,11 +388,12 @@ const addRow = () => {
         deleteModal.style.display = "block";
     });
 
-    // Attach the click event to .add-info inside the new row
-    newRow.querySelector(".add-info").addEventListener("click", () => {
-        document.querySelector(".add-info-modal").style.display = "block";
-        document.querySelector(".add-info-overlay").style.display = "block";
-    });
+    // // Attach the click event to .add-info inside the new row
+    // newRow.querySelector(".add-info").addEventListener("click", () => {
+    //     document.querySelector(".info-text").value = "";
+    //     document.querySelector(".add-info-modal").style.display = "block";
+    //     document.querySelector(".add-info-overlay").style.display = "block";
+    // });
 };
 
 
@@ -418,7 +429,7 @@ const addRow = () => {
             deleteOverlay.style.display = "block";
             deleteModal.style.display = "block";
         });
-    });
+    });    
 
     // Handle number-only input
     document.addEventListener("input", (e) => {
@@ -432,18 +443,45 @@ const addRow = () => {
 });
 
 
+let customers = []
+function sortICustomers(customer){
+    
+    customers.push(customer)
+    // console.log(workers);
+
+    customers.sort((a, b) => a.localeCompare(b, 'az', { sensitivity: 'base' }));
+    // console.log(workers);
+
+    return customers
+}
+
 
 // Customer Dropdown menu for first row
 const customerDropdown = document.querySelector(".customer-dropdown")
 fetch("http://localhost:5000/api/Person/GetPersonsDropdown")
 .then(response => response.json())
 .then(posts => {
-    console.log(posts);
-    let code = `<option value="" selected disabled hidden ></option>
-                <option class="add-new-customer-dropdown" value="add-customer" style="background-color: black; color: white">✚</option>`
-    posts.forEach(function (item) {
-        code += ` <option value="${item.id}"><a href="#">${item.name}</a></option> `
+
+    let code = ""
+
+    code += `
+        <option value="" selected disabled hidden ></option>
+        <option class="add-new-customer-dropdown" value="add-customer" style="background-color: black; color: white">✚</option>
+    `
+    
+    posts.forEach(post => {
+        sortICustomers(post.name)
     })
+
+    console.log(customers);
+
+    customers.forEach(item => {
+        const customer = posts.find(post => post.name === item)
+        console.log(customer);
+        
+        code += ` <option value="${customer.id}"><a href="#">${customer.name}</a></option> `
+    })
+
     customerDropdown.innerHTML = code
 })
 
@@ -502,17 +540,44 @@ const enterCustomerName = document.querySelector(".enter-customer-name");
     });
 });
 
+
+let products = []
+function sortProducts(product){
+    
+    products.push(product)
+    // console.log(workers);
+
+    products.sort((a, b) => a.localeCompare(b, 'az', { sensitivity: 'base' }));
+    // console.log(workers);
+
+    return products
+}
+
+
 // Product Dropdown Menu for first row
 const productDropdown = document.querySelector(".product-dropdown")
 fetch("http://localhost:5000/api/Product/GetProductsDropdown")
 .then(response => response.json())
 .then(posts => {
-    console.log(posts);
-    let code = `<option value="" selected disabled hidden ></option>`
-    code +=`<option class="add-new-product-dropdown" value="add-product" style="background-color: black; color: white">✚</option>`
-    console.log(code);
-    posts.forEach(function (item) {
-        code += `<option class="prod-id" value="${item.id}"><a href="#">${item.name}</a></option>`
+    // console.log(posts);
+
+
+    let code = ""
+    code +=`
+        <option value="" selected disabled hidden ></option>
+        <option class="add-new-product-dropdown" value="add-product" style="background-color: black; color: white">✚</option>
+    `
+
+    posts.forEach(post => {
+        sortProducts(post.name) 
+    })
+
+    console.log(products);
+
+    products.forEach(item => {
+        const product = posts.find(post => post.name === item)
+        console.log(product);
+        code += `<option class="prod-id" value="${product.id}"><a href="#">${product.name}</a></option>`
     })
     productDropdown.innerHTML = code
 })
@@ -573,18 +638,54 @@ const enterWeight = document.querySelector(".enter-weight");
     });
 });
 
+
+let executors = []
+function sortExecutors(executor){
+    
+    executors.push(executor)
+    // console.log(workers);
+
+    executors.sort((a, b) => a.localeCompare(b, 'az', { sensitivity: 'base' }));
+    // console.log(workers);
+
+    return executors
+}
+
+
 // Executor Dropdown Menu for first row
 const executorDropdown = document.querySelector(".executor-dropdown")
 fetch("http://localhost:5000/api/Employee/GetEmployeesDropdown")
 .then(response => response.json())
 .then(posts => {
+
     console.log(posts);
     let code = `<option value="" selected disabled hidden ></option>`
-    posts.forEach(function (item) {
-        code += `<option value="${item.id}">${item.name}</option>`
+
+    posts.forEach(post => {
+        sortExecutors(post.name)
+    })
+
+    console.log(executors);
+
+    executors.forEach(item => {
+        const executor = posts.find(post => post.name === item)
+        code += `<option value="${executor.id}">${executor.name}</option>`
     })
     executorDropdown.innerHTML = code
 })
+
+
+let workers = []
+function sortWorkers(worker){
+    
+    workers.push(worker)
+    // console.log(workers);
+
+    workers.sort((a, b) => a.localeCompare(b, 'az', { sensitivity: 'base' }));
+    // console.log(workers);
+
+    return workers
+}
 
 
 // Worker Dropdown Menu for first row
@@ -595,8 +696,16 @@ fetch("http://localhost:5000/api/Worker/GetWorkers")
     console.log(posts);
     let code = `<option value="" selected disabled hidden ></option>
     <option class="add-new-worker-dropdown" value="add-worker" style="background-color: black; color: white">✚</option>`
-    posts.forEach(function (item) {
-        code += `<option value="${item.id}">${item.name}</option>`
+
+    posts.forEach(post => {
+        sortWorkers(post.name)
+    })
+
+    console.log(workers);
+
+    workers.forEach(function (item) {
+        const worker = posts.find( post => post.name === item)
+        code += `<option value="${worker.id}">${worker.name}</option>`
     })
     workerDropdown.innerHTML = code
 })
@@ -1148,10 +1257,16 @@ infoText.addEventListener("change", (e)=> {
 // })
 
 
-document.querySelectorAll(".add-info").forEach(info => info.addEventListener("click", ()=> {
+
+
+
+
+
+
+document.querySelector(".add-info").addEventListener("click", ()=> {
     document.querySelector(".add-info-modal").style.display = "block"
     document.querySelector(".add-info-overlay").style.display = "block"
-}))
+})
 
 
 document.querySelector(".add-info-overlay").addEventListener("click", ()=> {
@@ -1288,7 +1403,7 @@ document.querySelector(".save-operation-btn").addEventListener("click", (e) => {
 // Function to check if the input is disabled and its value
 function checkInput(inputElement, fieldName){
     if (!inputElement.disabled) {
-        if (inputElement.value == 0 || inputElement.value === "1") {
+        if (inputElement.value.trim() == "") {
             console.log(`Please fill the ${fieldName} field.`);
             return false; // Invalid input
         }
